@@ -12,8 +12,8 @@ namespace TanookiSquirrel
             Flying,
             Tumbling,
             Running,
-            Swimming
-
+            Swimming,
+            Spinning
         }
 
 

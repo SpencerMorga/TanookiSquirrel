@@ -10,7 +10,7 @@ namespace TanookiSquirrel
     public class TanookiAnimation : TanookiSprite
     {
         TimeSpan elaspedtanookiTime;
-        public TimeSpan Time2wait4tanooki = new TimeSpan(0, 0, 0, 0, 300);
+        public TimeSpan Time2wait4tanooki = new TimeSpan(0, 0, 0, 0, 70);
         protected List<Rectangle> frames;
         public int currentTanookiframeIndex = 0;
 

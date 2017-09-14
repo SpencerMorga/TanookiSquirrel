@@ -19,8 +19,8 @@ namespace TanookiSquirrel
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        
-            
+
+        TheGenuineTanooki RaccoonDog;
 
 
 
@@ -51,7 +51,7 @@ namespace TanookiSquirrel
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(300), new Vector2(300), Color.White, new List<Rectangle>());
             // TODO: use this.Content to load your game content here
         }
 
@@ -62,6 +62,9 @@ namespace TanookiSquirrel
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
+
+
         }
 
         /// <summary>
@@ -74,9 +77,9 @@ namespace TanookiSquirrel
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
+            KeyboardState ks = Keyboard.GetState();
             // TODO: Add your update logic here
-
+            RaccoonDog.Update(gameTime, ks);
             base.Update(gameTime);
         }
 
@@ -89,7 +92,7 @@ namespace TanookiSquirrel
             spriteBatch.Begin();
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            RaccoonDog.Draw(spriteBatch);
             // TODO: Add your drawing code here
             spriteBatch.End();
             base.Draw(gameTime);
