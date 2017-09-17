@@ -51,7 +51,7 @@ namespace TanookiSquirrel
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(300), new Vector2(300), Color.White, new List<Rectangle>());
+            RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(300), new Vector2(3), Color.White, new List<Rectangle>());
             // TODO: use this.Content to load your game content here
         }
 
@@ -91,7 +91,7 @@ namespace TanookiSquirrel
         {
             spriteBatch.Begin();
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Gainsboro);
             RaccoonDog.Draw(spriteBatch);
             // TODO: Add your drawing code here
             spriteBatch.End();

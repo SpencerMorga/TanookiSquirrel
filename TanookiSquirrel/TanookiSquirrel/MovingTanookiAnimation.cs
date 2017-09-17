@@ -9,7 +9,7 @@ namespace TanookiSquirrel
 {
     public class MovingTanookiAnimation : TanookiAnimation
     {
-        Vector2 speed;
+        public Vector2 speed;
         
         public MovingTanookiAnimation(Texture2D image, Vector2 position, Vector2 speed,Color color, List<Rectangle> frames)
             : base (image, position, color, frames)
