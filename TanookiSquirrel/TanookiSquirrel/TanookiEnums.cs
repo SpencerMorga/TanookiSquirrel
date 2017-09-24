@@ -9,11 +9,13 @@ namespace TanookiSquirrel
     {
         public enum TanookiFrames
         {
-            Flying,
-            Tumbling,
-            Running,
+            Flying, //
+            Tumbling, 
+            Running, //
             Swimming,
-            Spinning
+            Spinning,
+            Idle,
+            Stone
         }
 
 

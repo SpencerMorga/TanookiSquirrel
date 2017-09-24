@@ -12,6 +12,7 @@ namespace TanookiSquirrel
     {
         Dictionary<TanookiEnums.TanookiFrames, List<Rectangle>> aneemayshun;
         private TanookiEnums.TanookiFrames TanookiState;
+        int floor = 900;
         TanookiEnums.TanookiFrames currentTanookiState
         {
             get
@@ -67,7 +68,7 @@ swimming
             aneemayshun = new Dictionary<TanookiEnums.TanookiFrames, List<Rectangle>>();
             aneemayshun.Add(TanookiEnums.TanookiFrames.Running, ExperimentalRunning);
 
-            List<Rectangle> RegularFlying = new List<Rectangle>()
+            List<Rectangle> PSpeedFlying = new List<Rectangle>()
             {
                 new Rectangle(419, 278, 24, 28),
                 new Rectangle(446, 279, 24, 27),
@@ -75,47 +76,100 @@ swimming
 
             };
           //  aneemayshun = new Dictionary<TanookiEnums.TanookiFrames, List<Rectangle>>();
-            aneemayshun.Add(TanookiEnums.TanookiFrames.Flying, RegularFlying);
-            currentTanookiState = TanookiEnums.TanookiFrames.Running;
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Flying, PSpeedFlying);
+
+            List<Rectangle> Idle = new List<Rectangle>()
+            {
+                new Rectangle (62, 278, 21, 29)
+
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Idle, Idle);
+            List<Rectangle> StoneMarioWithABulletInHisHead = new List<Rectangle>()
+            { new Rectangle (524, 277, 16, 29)};
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Stone, StoneMarioWithABulletInHisHead);
+
+            currentTanookiState = TanookiEnums.TanookiFrames.Idle;
             this.frames = aneemayshun[currentTanookiState];
         }
 
+        bool isFalling = true;
+
         public void Update (GameTime gTime, KeyboardState ks)
         {
+            if (position.Y + frames[currentTanookiframeIndex].Height > floor)
+            {
+                position.Y = floor - frames[currentTanookiframeIndex].Height;
+                isFalling = false;
+            }
+
             frames = aneemayshun[currentTanookiState];
             if (currentTanookiState == TanookiEnums.TanookiFrames.Running)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
                 {
-                    currentTanookiState = TanookiEnums.TanookiFrames.Running;
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
             if (ks.IsKeyDown(Keys.R))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Running;
+                position.X += speed.X;
             }
 
             if (currentTanookiState == TanookiEnums.TanookiFrames.Flying)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
                 {
-                    currentTanookiState = TanookiEnums.TanookiFrames.Running;
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
             if (ks.IsKeyDown(Keys.F))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Flying;
                 position.Y -= speed.Y;
+                isFalling = true;
             }
             else
             {
-                position.Y += speed.Y;
+                if (isFalling)
+                {
+                    position.Y += speed.Y;
+                }
+            }
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Idle)
+            {
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
+            if (ks.IsKeyDown(Keys.I))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                position.X -= speed.X;
+            }
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Stone)
+            {
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
+            if (ks.IsKeyDown(Keys.S))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Stone;
             }
             //make stationary flying frame when falling
             base.Update(gTime);
         }
 
 
+        public void DrawFloor(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
+        {
+            Texture2D pixel = new Texture2D(graphicsDevice, 1, 1);
+            pixel.SetData(new Color[] { Color.White });
 
+            spriteBatch.Draw(pixel, new Rectangle(0, floor, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height - floor), Color.Gray);
+        }
     }
 }
