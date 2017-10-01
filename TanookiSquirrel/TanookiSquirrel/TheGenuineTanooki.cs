@@ -10,9 +10,9 @@ namespace TanookiSquirrel
 {
     class TheGenuineTanooki : MovingTanookiAnimation
     {
-        Dictionary<TanookiEnums.TanookiFrames, List<Rectangle>> aneemayshun;
+        Dictionary<TanookiEnums.TanookiFrames, List<Frame>> aneemayshun;
         private TanookiEnums.TanookiFrames TanookiState;
-        int floor = 900;
+        int floor = 800;
         TanookiEnums.TanookiFrames currentTanookiState
         {
             get
@@ -56,37 +56,56 @@ swimming
          * 
         
         */
-        public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Rectangle> frames)
+        public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
             : base (image, position, speed, color, frames)
         {
-            List<Rectangle> ExperimentalRunning = new List<Rectangle>()
+            List<Frame> ExperimentalRunning = new List<Frame>()
             {
-                new Rectangle(86, 278, 22, 29),
-                new Rectangle(62, 278, 21, 29),
-                new Rectangle(562, 277, 22, 29),
+                new Frame(new Rectangle(86, 278, 22, 29), new Vector2()),
+                new Frame(new Rectangle(62, 278, 21, 29), new Vector2()),
+                new Frame(new Rectangle(562, 277, 22, 29), new Vector2()),
             };
-            aneemayshun = new Dictionary<TanookiEnums.TanookiFrames, List<Rectangle>>();
+            aneemayshun = new Dictionary<TanookiEnums.TanookiFrames, List<Frame>>();
             aneemayshun.Add(TanookiEnums.TanookiFrames.Running, ExperimentalRunning);
 
-            List<Rectangle> PSpeedFlying = new List<Rectangle>()
+            List<Frame> PSpeedFlying = new List<Frame>()
             {
-                new Rectangle(419, 278, 24, 28),
-                new Rectangle(446, 279, 24, 27),
-                new Rectangle(473, 279, 24, 27)
+                new Frame(new Rectangle(419, 278, 24, 28), new Vector2()),
+                new Frame(new Rectangle(446, 279, 24, 27), new Vector2()),
+                new Frame(new Rectangle(473, 279, 24, 27), new Vector2()),
 
             };
           //  aneemayshun = new Dictionary<TanookiEnums.TanookiFrames, List<Rectangle>>();
             aneemayshun.Add(TanookiEnums.TanookiFrames.Flying, PSpeedFlying);
 
-            List<Rectangle> Idle = new List<Rectangle>()
+            List<Frame> BeingShotOutofACannon = new List<Frame>()
             {
-                new Rectangle (62, 278, 21, 29)
+                new Frame(new Rectangle (442, 390, 21, 20), new Vector2(-6, -5)),
+                new Frame(new Rectangle (446, 387, 20, 23), new Vector2(-5, -6)),
+                new Frame(new Rectangle (489, 389, 20, 20), new Vector2(-5, -5)),
+                new Frame(new Rectangle (320, 390, 23, 20), new Vector2(-6, -5)),
+                new Frame(new Rectangle (346, 390, 22, 20), new Vector2(-6, -5)),
+                new Frame(new Rectangle (370, 387, 20, 23), new Vector2(-5, -6)),
+                new Frame(new Rectangle (393, 389, 20, 21), new Vector2(-5, -6)),
+                new Frame(new Rectangle (416, 390, 23, 20), new Vector2(-6, -5)),
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Tumbling, BeingShotOutofACannon);
+
+            List<Frame> Idle = new List<Frame>()
+            {
+                new Frame(new Rectangle (62, 278, 21, 29), new Vector2()),
 
             };
             aneemayshun.Add(TanookiEnums.TanookiFrames.Idle, Idle);
-            List<Rectangle> StoneMarioWithABulletInHisHead = new List<Rectangle>()
-            { new Rectangle (524, 277, 16, 29)};
+
+            List<Frame> StoneMarioWithABulletInHisHead = new List<Frame>()
+            { new Frame(new Rectangle (524, 277, 16, 29), new Vector2()), };
             aneemayshun.Add(TanookiEnums.TanookiFrames.Stone, StoneMarioWithABulletInHisHead);
+
+            List<Frame> PullingHatOverHead = new List<Frame>()
+            { new Frame(new Rectangle (500, 280, 21, 26), new Vector2()),};
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Pull_Hat_Over_Head, PullingHatOverHead);
+
 
             currentTanookiState = TanookiEnums.TanookiFrames.Idle;
             this.frames = aneemayshun[currentTanookiState];
@@ -96,9 +115,9 @@ swimming
 
         public void Update (GameTime gTime, KeyboardState ks)
         {
-            if (position.Y + frames[currentTanookiframeIndex].Height > floor)
+            if (position.Y + frames[currentTanookiframeIndex].frame.Height > floor)
             {
-                position.Y = floor - frames[currentTanookiframeIndex].Height;
+                position.Y = floor - frames[currentTanookiframeIndex].frame.Height;
                 isFalling = false;
             }
 
@@ -158,6 +177,32 @@ swimming
             if (ks.IsKeyDown(Keys.S))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Stone;
+            }
+
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Pull_Hat_Over_Head)
+            {
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+
+            }
+            if (ks.IsKeyDown(Keys.P))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Pull_Hat_Over_Head;
+            }
+
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Tumbling)
+            {
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
+            if (ks.IsKeyDown(Keys.T))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Tumbling;
+                position.X += speed.X;
             }
             //make stationary flying frame when falling
             base.Update(gTime);

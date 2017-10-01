@@ -13,9 +13,10 @@ namespace TanookiSquirrel
             Tumbling, 
             Running, //
             Swimming,
-            Spinning,
-            Idle,
-            Stone
+            Sitting,
+            Idle, //
+            Stone, //
+            Pull_Hat_Over_Head 
         }
 
 

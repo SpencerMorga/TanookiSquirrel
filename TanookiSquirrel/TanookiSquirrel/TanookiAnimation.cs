@@ -11,10 +11,10 @@ namespace TanookiSquirrel
     {
         TimeSpan elaspedtanookiTime;
         public TimeSpan Time2wait4tanooki = new TimeSpan(0, 0, 0, 0, 70);
-        protected List<Rectangle> frames;
+        protected List<Frame> frames;
         public int currentTanookiframeIndex = 0;
 
-        public TanookiAnimation (Texture2D image, Vector2 position, Color color, List<Rectangle> frames)
+        public TanookiAnimation (Texture2D image, Vector2 position, Color color, List<Frame> frames)
             : base (image, position, color)
         {
             this.image = image;
@@ -36,11 +36,11 @@ namespace TanookiSquirrel
                 }
                 elaspedtanookiTime = TimeSpan.Zero;
             }
-            hitbox = new Rectangle((int)position.X, (int)position.Y, frames[currentTanookiframeIndex].Width, frames[currentTanookiframeIndex].Height);
+            hitbox = new Rectangle((int)position.X, (int)position.Y, frames[currentTanookiframeIndex].frame.Width, frames[currentTanookiframeIndex].frame.Height);
         }
         public virtual void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, position, frames[currentTanookiframeIndex], color);
+            sb.Draw(image, position, frames[currentTanookiframeIndex].frame, color,0f, frames[currentTanookiframeIndex].origin,1f, SpriteEffects.None, 0f);
         }
     }
 }

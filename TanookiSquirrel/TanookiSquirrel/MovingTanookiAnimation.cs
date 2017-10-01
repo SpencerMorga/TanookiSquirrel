@@ -11,7 +11,7 @@ namespace TanookiSquirrel
     {
         public Vector2 speed;
         
-        public MovingTanookiAnimation(Texture2D image, Vector2 position, Vector2 speed,Color color, List<Rectangle> frames)
+        public MovingTanookiAnimation(Texture2D image, Vector2 position, Vector2 speed,Color color, List<Frame> frames)
             : base (image, position, color, frames)
         {
             this.speed = speed;
