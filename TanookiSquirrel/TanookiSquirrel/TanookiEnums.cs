@@ -16,7 +16,8 @@ namespace TanookiSquirrel
             Sitting,
             Idle, //
             Stone, //
-            Pull_Hat_Over_Head 
+            Pull_Hat_Over_Head,
+            SpinAttack
         }
 
 

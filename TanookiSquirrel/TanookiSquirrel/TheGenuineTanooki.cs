@@ -49,8 +49,8 @@ stone raccoon dog
 
 swimming
 661, 278, 24, 28
-742, 279, 23, 27
-768, 279, 24, 27
+
+
          *
          *
          * 
@@ -106,6 +106,23 @@ swimming
             { new Frame(new Rectangle (500, 280, 21, 26), new Vector2()),};
             aneemayshun.Add(TanookiEnums.TanookiFrames.Pull_Hat_Over_Head, PullingHatOverHead);
 
+            List<Frame> SpinAttack = new List<Frame>()
+            {
+                new Frame(new Rectangle (156, 278, 16, 29), new Vector2()),
+                new Frame(new Rectangle (175, 278, 23, 29), new Vector2()),
+                new Frame(new Rectangle (200, 278, 16, 29), new Vector2()),
+                new Frame(new Rectangle (62, 278, 21, 29), new Vector2()),
+                new Frame(new Rectangle (62, 278, 21, 29), new Vector2()),
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.SpinAttack, SpinAttack);
+
+            List<Frame> Swimming = new List<Frame>()
+            {
+                new Frame(new Rectangle(715, 278, 24, 28), new Vector2()),
+                new Frame(new Rectangle (742, 279, 23, 27), new Vector2()),
+                new Frame(new Rectangle (768, 279, 24, 27), new Vector2()),
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Swimming, Swimming);
 
             currentTanookiState = TanookiEnums.TanookiFrames.Idle;
             this.frames = aneemayshun[currentTanookiState];
@@ -121,6 +138,18 @@ swimming
                 isFalling = false;
             }
 
+
+            switch(currentTanookiState)
+            {
+                case TanookiEnums.TanookiFrames.Swimming:
+                    Time2wait4tanooki = new TimeSpan(0, 0, 0, 0, 350);
+                    break;
+                default:
+                    Time2wait4tanooki = new TimeSpan(0, 0, 0, 0, 70);
+                    break;
+            }
+
+
             frames = aneemayshun[currentTanookiState];
             if (currentTanookiState == TanookiEnums.TanookiFrames.Running)
             {
@@ -129,7 +158,7 @@ swimming
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-            if (ks.IsKeyDown(Keys.R))
+            if (ks.IsKeyDown(Keys.D))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Running;
                 position.X += speed.X;
@@ -142,7 +171,7 @@ swimming
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-            if (ks.IsKeyDown(Keys.F))
+            if (ks.IsKeyDown(Keys.W))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Flying;
                 position.Y -= speed.Y;
@@ -162,7 +191,7 @@ swimming
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-            if (ks.IsKeyDown(Keys.I))
+            if (ks.IsKeyDown(Keys.A))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 position.X -= speed.X;
@@ -174,7 +203,7 @@ swimming
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-            if (ks.IsKeyDown(Keys.S))
+            if (ks.IsKeyDown(Keys.Up))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Stone;
             }
@@ -187,7 +216,7 @@ swimming
                 }
 
             }
-            if (ks.IsKeyDown(Keys.P))
+            if (ks.IsKeyDown(Keys.S))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Pull_Hat_Over_Head;
             }
@@ -199,11 +228,41 @@ swimming
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-            if (ks.IsKeyDown(Keys.T))
+            if (ks.IsKeyDown(Keys.Right))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Tumbling;
                 position.X += speed.X;
             }
+
+            if(currentTanookiState == TanookiEnums.TanookiFrames.SpinAttack)
+            {
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
+            if (ks.IsKeyDown(Keys.Down))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.SpinAttack;
+                position.X += speed.X;
+            }
+            //if (currentTanookiState == TanookiEnums.TanookiFrames.Swimming)
+            //{
+
+            //}
+            if (ks.IsKeyDown(Keys.Left))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Swimming;
+            }
+            else
+            {
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
+
+
             //make stationary flying frame when falling
             base.Update(gTime);
         }
