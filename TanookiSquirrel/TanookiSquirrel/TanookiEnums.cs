@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TanookiSquirrel
 {
-    static class TanookiEnums
+    public static class TanookiEnums
     {
         public enum TanookiFrames
         {
@@ -20,7 +20,11 @@ namespace TanookiSquirrel
             SpinAttack
         }
 
-
+        public enum PixelTypes
+        {
+            Wall,
+            Water
+        }
 
     }
 }

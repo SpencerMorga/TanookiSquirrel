@@ -22,7 +22,7 @@ namespace TanookiSquirrel
 
         TheGenuineTanooki RaccoonDog;
 
-
+        Map map;
 
         public Game1()
         {
@@ -55,7 +55,10 @@ namespace TanookiSquirrel
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(300), new Vector2(3), Color.White, new List<Frame>());
-            // TODO: use this.Content to load your game content here
+
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White));
+
+            map = new Map(Content.Load<Texture2D>("map"));
         }
 
         /// <summary>
@@ -91,13 +94,16 @@ namespace TanookiSquirrel
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
-        {
+        {            
+            GraphicsDevice.Clear(Color.Gainsboro);
+
             spriteBatch.Begin();
 
-            GraphicsDevice.Clear(Color.Gainsboro);
+            map.Draw(spriteBatch);
+
             RaccoonDog.DrawFloor(spriteBatch, GraphicsDevice);
-            RaccoonDog.Draw(spriteBatch);            
-            // TODO: Add your drawing code here
+            RaccoonDog.Draw(spriteBatch);                                    
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

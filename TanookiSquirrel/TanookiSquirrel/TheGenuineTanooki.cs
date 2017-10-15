@@ -11,19 +11,19 @@ namespace TanookiSquirrel
     class TheGenuineTanooki : MovingTanookiAnimation
     {
         Dictionary<TanookiEnums.TanookiFrames, List<Frame>> aneemayshun;
-        private TanookiEnums.TanookiFrames TanookiState;
+        private TanookiEnums.TanookiFrames TanookiStatesss;
         int floor = 800;
         TanookiEnums.TanookiFrames currentTanookiState
         {
             get
             {
-                return TanookiState;
+                return TanookiStatesss;
             }
             set
             {
-                if (TanookiState != value)
+                if (TanookiStatesss != value)
                 {
-                    TanookiState = value;
+                    TanookiStatesss = value;
                     currentTanookiframeIndex = 0;
                 }
             }
@@ -119,8 +119,9 @@ swimming
             List<Frame> Swimming = new List<Frame>()
             {
                 new Frame(new Rectangle(715, 278, 24, 28), new Vector2()),
-                new Frame(new Rectangle (742, 279, 23, 27), new Vector2()),
                 new Frame(new Rectangle (768, 279, 24, 27), new Vector2()),
+                new Frame(new Rectangle (742, 279, 23, 27), new Vector2()),
+
             };
             aneemayshun.Add(TanookiEnums.TanookiFrames.Swimming, Swimming);
 
@@ -142,7 +143,7 @@ swimming
             switch(currentTanookiState)
             {
                 case TanookiEnums.TanookiFrames.Swimming:
-                    Time2wait4tanooki = new TimeSpan(0, 0, 0, 0, 350);
+                    Time2wait4tanooki = new TimeSpan(0, 0, 0, 0, 100);
                     break;
                 default:
                     Time2wait4tanooki = new TimeSpan(0, 0, 0, 0, 70);
@@ -253,13 +254,6 @@ swimming
             if (ks.IsKeyDown(Keys.Left))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Swimming;
-            }
-            else
-            {
-                if (currentTanookiframeIndex + 1 >= frames.Count)
-                {
-                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
-                }
             }
 
 
