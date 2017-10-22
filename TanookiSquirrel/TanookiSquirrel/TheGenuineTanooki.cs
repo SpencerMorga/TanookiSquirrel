@@ -129,7 +129,7 @@ swimming
             this.frames = aneemayshun[currentTanookiState];
         }
 
-        bool isFalling = true;
+        public bool isFalling = true;
 
         public void Update (GameTime gTime, KeyboardState ks)
         {

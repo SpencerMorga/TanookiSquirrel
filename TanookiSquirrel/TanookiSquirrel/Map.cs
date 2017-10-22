@@ -11,7 +11,7 @@ namespace TanookiSquirrel
     {
         Color[,] pixels;
 
-        List<TanookiSprite> sprites;
+        public Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>> Items { get; private set; }
 
         //make sure the images are the same size which is 200x200
         Vector2 scale = PixelItem.Items[TanookiEnums.PixelTypes.Wall].Sprite.scale;
@@ -20,7 +20,7 @@ namespace TanookiSquirrel
 
         public Map(Texture2D mapImage)
         {
-            sprites = new List<TanookiSprite>();
+            Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
 
             Color[] colors = new Color[mapImage.Width * mapImage.Height];
             
@@ -51,16 +51,24 @@ namespace TanookiSquirrel
 
         void AddSprite(TanookiEnums.PixelTypes pixelType, Vector2 position)
         {
-            sprites.Add(new TanookiSprite(PixelItem.Items[pixelType].Sprite.image, position, PixelItem.Items[pixelType].Sprite.color));
-            sprites[sprites.Count - 1].scale = scale;
+            if (!Items.Keys.Contains(pixelType))
+            {
+                Items.Add(pixelType, new List<TanookiSprite>());
+            }
+
+            Items[pixelType].Add(new TanookiSprite(PixelItem.Items[pixelType].Sprite.image, position, PixelItem.Items[pixelType].Sprite.color));
+            Items[pixelType][Items[pixelType].Count - 1].scale = scale;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (TanookiSprite sprite in sprites)
+            foreach (KeyValuePair<TanookiEnums.PixelTypes, List<TanookiSprite>> item in Items)
             {
-                sprite.Draw(spriteBatch);
+                for (int i = 0; i < item.Value.Count; i++)
+                {
+                    item.Value[i].Draw(spriteBatch);                    
+                }                
             }
-        }
+        }        
     }
 }

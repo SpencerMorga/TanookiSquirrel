@@ -36,11 +36,9 @@ namespace TanookiSquirrel
                 }
                 elaspedtanookiTime = TimeSpan.Zero;
             }
-            hitbox = new Rectangle((int)position.X, (int)position.Y, frames[currentTanookiframeIndex].frame.Width, frames[currentTanookiframeIndex].frame.Height);
+            sourceRectangle = frames[currentTanookiframeIndex].frame;
+            //hitbox = new Rectangle((int)position.X, (int)position.Y, frames[currentTanookiframeIndex].frame.Width, frames[currentTanookiframeIndex].frame.Height);
         }
-        public override void Draw(SpriteBatch sb)
-        {
-            sb.Draw(image, position, frames[currentTanookiframeIndex].frame, color,0f, frames[currentTanookiframeIndex].origin,1f, SpriteEffects.None, 0f);
-        }
+        
     }
 }

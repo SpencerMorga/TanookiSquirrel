@@ -35,7 +35,7 @@ namespace TanookiSquirrel
         {
             this.pixelColor = pixelColor;
             sprite = new TanookiSprite(image, Vector2.Zero, tint);
-            sprite.scale = new Vector2(.2f);
+            sprite.scale = new Vector2(.03f);
         }
 
         public static bool AddItem(PixelTypes pixelType, PixelItem pixelItem)
