@@ -18,6 +18,8 @@ namespace TanookiSquirrel
         Vector2 imageSize = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Wall].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Wall].Sprite.image.Height);
 
 
+        Vector2 scal2e = PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.scale;
+        Vector2 imageSize2 = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.image.Height);
         public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -43,7 +45,11 @@ namespace TanookiSquirrel
                     {
                         AddSprite(TanookiEnums.PixelTypes.Wall, position);
                     }
-                    
+                    // duplicate for lava and everything else
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Lava].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Lava, position);
+                    }
                     counter++;
                 }
             }
