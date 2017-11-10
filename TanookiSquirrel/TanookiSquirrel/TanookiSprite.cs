@@ -12,7 +12,7 @@ namespace TanookiSquirrel
         public Texture2D image;
         public Vector2 position;
         public Color color;        
-        public Vector2 scale;
+        public Vector2 Scale;
         public Rectangle? sourceRectangle;
         public Rectangle hitbox
         {
@@ -20,10 +20,10 @@ namespace TanookiSquirrel
             {
                 if (sourceRectangle == null)
                 {
-                    return new Rectangle((int)position.X, (int)position.Y, (int)(image.Width * scale.X), (int)(image.Height * scale.Y));
+                    return new Rectangle((int)position.X, (int)position.Y, (int)(image.Width * Scale.X), (int)(image.Height * Scale.Y));
                 }
                 
-                return new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Value.Width * scale.X), (int)(sourceRectangle.Value.Height * scale.Y));
+                return new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Value.Width * Scale.X), (int)(sourceRectangle.Value.Height * Scale.Y));
             }
         }
 
@@ -32,12 +32,12 @@ namespace TanookiSquirrel
             this.image = image;
             this.position = position;
             this.color = color;
-            scale = Vector2.One;            
+            Scale = Vector2.One;            
         }
 
         public virtual void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, position, sourceRectangle, color, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+            sb.Draw(image, position, sourceRectangle, color, 0, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }
 
         public void DrawHitbox(SpriteBatch sb, Color hitboxColor, GraphicsDevice graphicsDevice)

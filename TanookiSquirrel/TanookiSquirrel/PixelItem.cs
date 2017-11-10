@@ -31,11 +31,11 @@ namespace TanookiSquirrel
             get { return sprite; }
         }
 
-        public PixelItem(Color pixelColor, Texture2D image, Color tint)
+        public PixelItem(Color pixelColor, Texture2D image, Color tint, Vector2 scale)
         {
             this.pixelColor = pixelColor;
             sprite = new TanookiSprite(image, Vector2.Zero, tint);
-            sprite.scale = new Vector2(.03f);
+            sprite.Scale = scale;
         }
 
         public static bool AddItem(PixelTypes pixelType, PixelItem pixelItem)

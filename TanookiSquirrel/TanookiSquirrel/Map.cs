@@ -14,12 +14,22 @@ namespace TanookiSquirrel
         public Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>> Items { get; private set; }
 
         //make sure the images are the same size which is 200x200
-        Vector2 scale = PixelItem.Items[TanookiEnums.PixelTypes.Wall].Sprite.scale;
+        //wall
+        Vector2 scale =  PixelItem.Items[TanookiEnums.PixelTypes.Wall].Sprite.Scale;
         Vector2 imageSize = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Wall].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Wall].Sprite.image.Height);
 
+        //lava
+        Vector2 scaleLava = PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.Scale;
+        Vector2 imageSizeLava = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.image.Height);
 
-        Vector2 scal2e = PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.scale;
-        Vector2 imageSize2 = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Lava].Sprite.image.Height);
+        //flag
+        Vector2 scaleflag = PixelItem.Items[TanookiEnums.PixelTypes.Flag].Sprite.Scale;
+        
+        Vector2 imageSizeflag = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Flag].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Flag].Sprite.image.Height);
+
+        //star
+        Vector2 scalestar = PixelItem.Items[TanookiEnums.PixelTypes.Star].Sprite.Scale;
+        Vector2 imageSizeStar = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Star].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Star].Sprite.image.Height);
         public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -50,6 +60,14 @@ namespace TanookiSquirrel
                     {
                         AddSprite(TanookiEnums.PixelTypes.Lava, position);
                     }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Flag].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Flag, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Star].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Star, position);
+                    }
                     counter++;
                 }
             }
@@ -63,7 +81,7 @@ namespace TanookiSquirrel
             }
 
             Items[pixelType].Add(new TanookiSprite(PixelItem.Items[pixelType].Sprite.image, position, PixelItem.Items[pixelType].Sprite.color));
-            Items[pixelType][Items[pixelType].Count - 1].scale = scale;
+            Items[pixelType][Items[pixelType].Count - 1].Scale = scale;
         }
 
         public void Draw(SpriteBatch spriteBatch)

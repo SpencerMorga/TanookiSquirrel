@@ -254,6 +254,7 @@ swimming
             if (ks.IsKeyDown(Keys.Left))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Swimming;
+                position.X += speed.X;
             }
 
 

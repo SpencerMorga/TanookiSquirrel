@@ -24,7 +24,9 @@ namespace TanookiSquirrel
         {
             Wall,
             Water,
-            Lava
+            Lava,
+            Flag,
+            Star
         }
 
     }
