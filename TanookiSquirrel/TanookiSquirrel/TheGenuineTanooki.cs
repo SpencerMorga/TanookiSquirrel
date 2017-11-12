@@ -256,8 +256,7 @@ swimming
                 currentTanookiState = TanookiEnums.TanookiFrames.Swimming;
                 position.X += speed.X;
             }
-
-
+          
             //make stationary flying frame when falling
             base.Update(gTime);
         }

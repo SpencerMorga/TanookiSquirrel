@@ -21,8 +21,11 @@ namespace TanookiSquirrel
         
         TheGenuineTanooki RaccoonDog;
 
-        Map map;
+        
 
+        PlantThing plant;
+        public Map map;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -55,12 +58,15 @@ namespace TanookiSquirrel
             spriteBatch = new SpriteBatch(GraphicsDevice);
             RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 570), new Vector2(3), Color.White, new List<Frame>());
 
-            PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White, new Vector2(0.06f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White, new Vector2(0.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Lava, new PixelItem(Color.Red, Content.Load<Texture2D>("lava"), Color.White, new Vector2(0.03f)));
-            PixelItem.AddItem(TanookiEnums.PixelTypes.Flag, new PixelItem(Color.Green, Content.Load<Texture2D>("flag"), Color.White, new Vector2(0.1f)));
-            PixelItem.AddItem(TanookiEnums.PixelTypes.Star, new PixelItem(Color.Yellow, Content.Load<Texture2D>("star"), Color.White, new Vector2(1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Flag, new PixelItem(Color.Green, Content.Load<Texture2D>("flag"), Color.White, new Vector2(1.7f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Star, new PixelItem(Color.Yellow, Content.Load<Texture2D>("star"), Color.White, new Vector2(.06f)));
             map = new Map(Content.Load<Texture2D>("map"));
+            
         }
+
+
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -97,7 +103,14 @@ namespace TanookiSquirrel
                     RaccoonDog.isFalling = false;
                 }                
             }
-            
+            for (int a = 0; a < map.Items[TanookiEnums.PixelTypes.Flag].Count; a++)
+            {
+                if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Flag][a].hitbox))
+                {
+
+                }
+            }
+         
             base.Update(gameTime);
         }
 
@@ -114,8 +127,8 @@ namespace TanookiSquirrel
             map.Draw(spriteBatch);
 
             RaccoonDog.DrawFloor(spriteBatch, GraphicsDevice);
-            RaccoonDog.Draw(spriteBatch);                              
-
+            RaccoonDog.Draw(spriteBatch);
+           
             spriteBatch.End();
             base.Draw(gameTime);
         }

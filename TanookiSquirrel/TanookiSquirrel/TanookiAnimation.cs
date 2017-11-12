@@ -36,7 +36,7 @@ namespace TanookiSquirrel
                 }
                 elaspedtanookiTime = TimeSpan.Zero;
             }
-            sourceRectangle = frames[currentTanookiframeIndex].frame;
+           sourceRectangle = frames[currentTanookiframeIndex].frame;
             //hitbox = new Rectangle((int)position.X, (int)position.Y, frames[currentTanookiframeIndex].frame.Width, frames[currentTanookiframeIndex].frame.Height);
         }
         
