@@ -21,9 +21,7 @@ namespace TanookiSquirrel
         
         TheGenuineTanooki RaccoonDog;
 
-        
-
-        PlantThing plant;
+       
         public Map map;
         
         public Game1()
@@ -101,10 +99,16 @@ namespace TanookiSquirrel
                 if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
                 {
                     RaccoonDog.isFalling = false;
-                }                
+                }
             }
-         
-            base.Update(gameTime);
+            for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Star].Count; j++)
+            {
+                if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Star][j].hitbox))
+                {
+                    RaccoonDog.isFalling = false;
+                }
+                base.Update(gameTime);
+            }
         }
 
         /// <summary>
@@ -113,7 +117,8 @@ namespace TanookiSquirrel
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {            
-            GraphicsDevice.Clear(Color.Gainsboro);
+            GraphicsDevice.Clear(Color.Lerp(Color.CornflowerBlue, Color.Gainsboro, .85f));
+          //  GraphicsDevice.Clear(Color.Coral);
 
             spriteBatch.Begin();
 

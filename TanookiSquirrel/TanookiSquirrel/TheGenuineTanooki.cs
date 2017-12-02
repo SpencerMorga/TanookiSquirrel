@@ -118,9 +118,8 @@ swimming
 
             List<Frame> Swimming = new List<Frame>()
             {
-                new Frame(new Rectangle(715, 278, 24, 28), new Vector2()),
-                new Frame(new Rectangle (768, 279, 24, 27), new Vector2()),
-                new Frame(new Rectangle (742, 279, 23, 27), new Vector2()),
+                new Frame(new Rectangle(543, 279, 16, 27), new Vector2()),
+              
 
             };
             aneemayshun.Add(TanookiEnums.TanookiFrames.Swimming, Swimming);
