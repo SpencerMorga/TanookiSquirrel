@@ -49,7 +49,7 @@ namespace TanookiSquirrel
         /// </summary>
         protected override void LoadContent()
         {
-            graphics.PreferredBackBufferWidth = 1900;
+            graphics.PreferredBackBufferWidth = 1950;
             graphics.PreferredBackBufferHeight = 1000;
             graphics.ApplyChanges();
             // Create a new SpriteBatch, which can be used to draw textures.
