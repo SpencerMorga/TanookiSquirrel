@@ -87,7 +87,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="helicopter mushroom.png">
-      <Name>helicopter mushroom</Name>
+      <Name>mush</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="mush2.png">
+      <Name>mush2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

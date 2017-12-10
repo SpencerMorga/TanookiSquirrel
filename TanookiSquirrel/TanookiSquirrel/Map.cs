@@ -30,6 +30,10 @@ namespace TanookiSquirrel
         //star
         Vector2 scalestar = PixelItem.Items[TanookiEnums.PixelTypes.Star].Sprite.Scale;
         Vector2 imageSizeStar = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Star].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Star].Sprite.image.Height);
+
+        //flying mushroom
+        Vector2 scaleMush = PixelItem.Items[TanookiEnums.PixelTypes.Mush].Sprite.Scale;
+        Vector2 imageSizeMush = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Mush].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Mush].Sprite.image.Height);
         public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -68,6 +72,10 @@ namespace TanookiSquirrel
                     {
                         AddSprite(TanookiEnums.PixelTypes.Star, position);
                     }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Mush].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Mush, position);
+                    }
                     counter++;
                 }
             }
@@ -81,7 +89,10 @@ namespace TanookiSquirrel
             }
 
             Items[pixelType].Add(new TanookiSprite(PixelItem.Items[pixelType].Sprite.image, position, PixelItem.Items[pixelType].Sprite.color));
+            // line below makes everything go to wall's scale
+            // TODO: find a way to make scales of pixelitems independent of eachother
             Items[pixelType][Items[pixelType].Count - 1].Scale = scale;
+          
         }
 
         public void Draw(SpriteBatch spriteBatch)

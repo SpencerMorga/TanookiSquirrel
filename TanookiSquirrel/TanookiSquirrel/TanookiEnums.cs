@@ -26,7 +26,9 @@ namespace TanookiSquirrel
             Water,
             Lava,
             Flag,
-            Star
+            Star,
+            
+            Mush
         }
 
     }
