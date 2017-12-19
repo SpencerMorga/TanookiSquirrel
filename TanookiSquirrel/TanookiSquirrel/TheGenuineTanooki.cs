@@ -13,6 +13,7 @@ namespace TanookiSquirrel
         Dictionary<TanookiEnums.TanookiFrames, List<Frame>> aneemayshun;
         private TanookiEnums.TanookiFrames TanookiStatesss;
         int floor = 800;
+
         TanookiEnums.TanookiFrames currentTanookiState
         {
             get
@@ -28,37 +29,12 @@ namespace TanookiSquirrel
                 }
             }
         }
-
-        /*
-         * 
-         *flying
-264, 280, 23, 27
-290, 280, 23, 27
-316, 279, 22, 28
-
-p speed flying
-419, 278, 24, 28
-446, 279, 24, 27
-473, 279, 24, 27
-
-pull hat over head
-500, 279, 21, 27
-
-stone raccoon dog
-523, 277, 16, 29
-
-swimming
-661, 278, 24, 28
-
-
-         *
-         *
-         * 
         
-        */
+        
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
             : base (image, position, speed, color, frames)
         {
+            
             List<Frame> ExperimentalRunning = new List<Frame>()
             {
                 new Frame(new Rectangle(86, 278, 22, 29), new Vector2()),
@@ -191,11 +167,13 @@ swimming
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
+            /*
             if (ks.IsKeyDown(Keys.A))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 position.X -= speed.X;
             }
+            */
             if (currentTanookiState == TanookiEnums.TanookiFrames.Stone)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
@@ -241,7 +219,7 @@ swimming
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-            if (ks.IsKeyDown(Keys.Down))
+            if (ks.IsKeyDown(Keys.Space))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.SpinAttack;
                 position.X += speed.X;

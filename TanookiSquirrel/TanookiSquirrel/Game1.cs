@@ -14,13 +14,13 @@ namespace TanookiSquirrel
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         
         TheGenuineTanooki RaccoonDog;
-
+        ReverseFrames Tanuki;
        
         public Map map;
         
@@ -55,7 +55,7 @@ namespace TanookiSquirrel
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 570), new Vector2(3), Color.White, new List<Frame>());
-
+            Tanuki = new ReverseFrames(Content.Load<Texture2D>("tanuki"), new Vector2(60, 570), new Vector2(3), Color.White, new List<Frame>());
             PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White, new Vector2(0.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Lava, new PixelItem(Color.Red, Content.Load<Texture2D>("lava"), Color.White, new Vector2(0.03f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Flag, new PixelItem(Color.Green, Content.Load<Texture2D>("flag"), Color.White, new Vector2(2.9f)));
@@ -86,13 +86,14 @@ namespace TanookiSquirrel
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             KeyboardState ks = Keyboard.GetState();
             // TODO: Add your update logic here
             RaccoonDog.Update(gameTime, ks);
-
+            Tanuki.Update(gameTime, ks);
             RaccoonDog.isFalling = true;
 
             for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Wall].Count; i++)
@@ -102,11 +103,11 @@ namespace TanookiSquirrel
                     RaccoonDog.isFalling = false;
                 }
             }
-            for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Star].Count; j++)
+           for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Star].Count; j++)
             {
                 if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Star][j].hitbox))
                 {
-                    RaccoonDog.isFalling = false;
+                    
                 }
                 base.Update(gameTime);
             }
@@ -127,7 +128,7 @@ namespace TanookiSquirrel
 
             RaccoonDog.DrawFloor(spriteBatch, GraphicsDevice);
             RaccoonDog.Draw(spriteBatch);
-           
+            Tanuki.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
