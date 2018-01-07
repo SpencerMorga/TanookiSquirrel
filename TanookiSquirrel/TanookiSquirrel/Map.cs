@@ -72,10 +72,12 @@ namespace TanookiSquirrel
                     {
                         AddSprite(TanookiEnums.PixelTypes.Star, position);
                     }
+                    
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Mush].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.Mush, position);
                     }
+                    
                     counter++;
                 }
             }

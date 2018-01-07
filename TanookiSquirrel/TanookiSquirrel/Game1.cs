@@ -21,7 +21,6 @@ namespace TanookiSquirrel
         
         TheGenuineTanooki RaccoonDog;
 
-       
         public Map map;
         
         public Game1()
@@ -62,7 +61,9 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Star, new PixelItem(Color.Yellow, Content.Load<Texture2D>("star"), Color.White, new Vector2(.01f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Mush, new PixelItem(Color.Pink, Content.Load<Texture2D>("mush2"), Color.White, new Vector2(10f)));
             map = new Map(Content.Load<Texture2D>("map"));
-            
+            RaccoonDog.yesFly = false;
+          
+
         }
 
 
@@ -102,14 +103,14 @@ namespace TanookiSquirrel
                     RaccoonDog.isFalling = false;
                 }
             }
-            for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Star].Count; j++)
+            for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Mush].Count; j++)
             {
-                if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Star][j].hitbox))
+                if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Mush][j].hitbox))
                 {
-                    RaccoonDog.isFalling = false;
-                }
-                base.Update(gameTime);
+                    RaccoonDog.yesFly = true;
+                }            
             }
+            base.Update(gameTime);
         }
 
         /// <summary>
