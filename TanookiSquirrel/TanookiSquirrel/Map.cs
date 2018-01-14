@@ -34,6 +34,12 @@ namespace TanookiSquirrel
         //flying mushroom
         Vector2 scaleMush = PixelItem.Items[TanookiEnums.PixelTypes.Mush].Sprite.Scale;
         Vector2 imageSizeMush = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Mush].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Mush].Sprite.image.Height);
+
+        //sword
+        Vector2 scaleSword = PixelItem.Items[TanookiEnums.PixelTypes.Sword].Sprite.Scale;
+        Vector2 imageSizeSword = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Sword].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Sword].Sprite.image.Height);
+
+
         public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -76,6 +82,12 @@ namespace TanookiSquirrel
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Mush].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.Mush, position);
+                    }
+
+                    
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Sword].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Sword, position);
                     }
                     
                     counter++;

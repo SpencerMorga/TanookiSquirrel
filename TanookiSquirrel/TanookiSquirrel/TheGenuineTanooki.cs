@@ -31,8 +31,9 @@ namespace TanookiSquirrel
 
         public bool isFalling = true;
         public bool yesFly = false;
+        public bool dead = false;
 
-        float acceleration = 1f;
+        float acceleration = .6f;
         float initialYSpeed;
 
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
@@ -173,6 +174,8 @@ namespace TanookiSquirrel
                 speed.Y = initialYSpeed;
             }
 
+           
+            
             if (currentTanookiState == TanookiEnums.TanookiFrames.Idle)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
@@ -185,18 +188,21 @@ namespace TanookiSquirrel
                 currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 position.X -= speed.X;
             }
+
             if (currentTanookiState == TanookiEnums.TanookiFrames.Stone)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
                 {
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
+
             }
-            if (ks.IsKeyDown(Keys.Up))
+            if (dead == true)
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Stone;
                
             }
+            
 
             if (currentTanookiState == TanookiEnums.TanookiFrames.Pull_Hat_Over_Head)
             {

@@ -59,7 +59,8 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Lava, new PixelItem(Color.Red, Content.Load<Texture2D>("lava"), Color.White, new Vector2(0.03f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Flag, new PixelItem(Color.Green, Content.Load<Texture2D>("flag"), Color.White, new Vector2(2.9f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Star, new PixelItem(Color.Yellow, Content.Load<Texture2D>("star"), Color.White, new Vector2(.01f)));
-            PixelItem.AddItem(TanookiEnums.PixelTypes.Mush, new PixelItem(Color.Pink, Content.Load<Texture2D>("mush2"), Color.White, new Vector2(10f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Mush, new PixelItem(Color.Pink, Content.Load<Texture2D>("mush2"), Color.White, new Vector2(0f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Sword, new PixelItem(Color.Blue, Content.Load<Texture2D>("sword"), Color.White, new Vector2(1f)));
             map = new Map(Content.Load<Texture2D>("map"));
             RaccoonDog.yesFly = false;
           
@@ -110,6 +111,24 @@ namespace TanookiSquirrel
                     RaccoonDog.yesFly = true;
                 }            
             }
+            
+            for (int a = 0; a < map.Items[TanookiEnums.PixelTypes.Lava].Count; a++)
+            {
+                if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Lava][a].hitbox))
+                {
+                    RaccoonDog.dead = true;
+                }
+            }
+
+            for (int b = 0; b < map.Items[TanookiEnums.PixelTypes.Sword].Count; b++)
+            {
+                if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Sword][b].hitbox))
+                {
+                    
+                }
+            }
+
+            
             base.Update(gameTime);
         }
 
