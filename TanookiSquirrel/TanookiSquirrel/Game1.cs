@@ -53,7 +53,7 @@ namespace TanookiSquirrel
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 570), new Vector2(3), Color.White, new List<Frame>());
-            Tanuki = new ReverseFrames(Content.Load<Texture2D>("tanuki"), new Vector2(60, 570), new Vector2(3), Color.White, new List<Frame>());
+            
             PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White, new Vector2(0.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Lava, new PixelItem(Color.Red, Content.Load<Texture2D>("lava"), Color.White, new Vector2(0.03f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Flag, new PixelItem(Color.Green, Content.Load<Texture2D>("flag"), Color.White, new Vector2(2.9f)));
@@ -94,7 +94,7 @@ namespace TanookiSquirrel
             KeyboardState ks = Keyboard.GetState();
             // TODO: Add your update logic here
             RaccoonDog.Update(gameTime, ks);
-            Tanuki.Update(gameTime, ks);
+           
             RaccoonDog.isFalling = true;
 
             for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Wall].Count; i++)
@@ -124,8 +124,16 @@ namespace TanookiSquirrel
             {
                 if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Sword][b].hitbox))
                 {
-                    
+                    RaccoonDog.fight = true;
                 }
+            }
+            for (int c = 0; c < map.Items[TanookiEnums.PixelTypes.Star].Count; c++)
+            {
+                if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Star][c].hitbox))
+                {
+                    RaccoonDog.big = true;
+                }
+
             }
 
             
@@ -147,7 +155,7 @@ namespace TanookiSquirrel
 
             RaccoonDog.DrawFloor(spriteBatch, GraphicsDevice);
             RaccoonDog.Draw(spriteBatch);
-            Tanuki.Draw(spriteBatch);
+           
             spriteBatch.End();
             base.Draw(gameTime);
         }
