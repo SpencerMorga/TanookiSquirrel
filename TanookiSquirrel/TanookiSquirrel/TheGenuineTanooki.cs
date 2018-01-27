@@ -13,6 +13,7 @@ namespace TanookiSquirrel
         Dictionary<TanookiEnums.TanookiFrames, List<Frame>> aneemayshun;
         private TanookiEnums.TanookiFrames TanookiStatesss;
         int floor = 800;
+
         TanookiEnums.TanookiFrames currentTanookiState
         {
             get
@@ -183,12 +184,13 @@ namespace TanookiSquirrel
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
+            /*
             if (ks.IsKeyDown(Keys.A))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 position.X -= speed.X;
             }
-
+            */
             if (currentTanookiState == TanookiEnums.TanookiFrames.Stone)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)

@@ -30,6 +30,11 @@ namespace TanookiSquirrel
             Sword,
             Mush
         }
+        public enum TanookiFrames2
+        {
+            rWalking,
+            rIdle
+        }
 
     }
 }
