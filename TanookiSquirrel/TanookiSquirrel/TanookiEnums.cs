@@ -17,7 +17,8 @@ namespace TanookiSquirrel
             Idle, //
             Stone, //
             Pull_Hat_Over_Head,
-            SpinAttack
+            SpinAttack,
+            DEATH
         }
 
         public enum PixelTypes

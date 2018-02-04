@@ -34,7 +34,7 @@ namespace TanookiSquirrel
         public bool dead = false;
         public bool fight = false;
         public bool big = false;
-        float acceleration = .3f;
+        float acceleration = .8f;
         float initialYSpeed;
 
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
@@ -61,6 +61,13 @@ namespace TanookiSquirrel
             //  aneemayshun = new Dictionary<TanookiEnums.TanookiFrames, List<Rectangle>>();
             aneemayshun.Add(TanookiEnums.TanookiFrames.Flying, PSpeedFlying);
 
+            List<Frame> Dead = new List<Frame>()
+            {
+                new Frame(new Rectangle(111, 280, 23, 27), new Vector2()),
+
+
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.DEATH, Dead);
             List<Frame> BeingShotOutofACannon = new List<Frame>()
             {
                 new Frame(new Rectangle (442, 390, 21, 20), new Vector2(-6, -5)),
@@ -178,11 +185,16 @@ namespace TanookiSquirrel
 
             if (big)
             {
-                if (ks.IsKeyDown(Keys.D4)) Scale = new Vector2(4f);
-                if (ks.IsKeyDown(Keys.D1)) Scale = new Vector2(1.3f);
-                if (ks.IsKeyDown(Keys.D3)) Scale = new Vector2(3f);
-                if (ks.IsKeyDown(Keys.D2)) Scale = new Vector2(2f);
-                if (ks.IsKeyDown(Keys.D5)) Scale = new Vector2(5f);
+                if (ks.IsKeyDown(Keys.NumPad4)) { Scale = new Vector2(4f); acceleration = .8f; }
+                if (ks.IsKeyDown(Keys.NumPad1)) { Scale = new Vector2(1f); acceleration = .8f; }
+                if (ks.IsKeyDown(Keys.NumPad3)) { Scale = new Vector2(3f); acceleration = .8f; }
+                if (ks.IsKeyDown(Keys.NumPad2)) { Scale = new Vector2(2f); acceleration = .8f; }
+                if (ks.IsKeyDown(Keys.NumPad5)) { Scale = new Vector2(5f); acceleration = .8f; }
+                if (ks.IsKeyDown(Keys.NumPad9)) { Scale = new Vector2(9f); acceleration = .8f; }
+                if (ks.IsKeyDown(Keys.NumPad0))
+                {
+                    Scale = new Vector2(.5f); acceleration = .01f;
+                }
              
             }
            
@@ -209,6 +221,13 @@ namespace TanookiSquirrel
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
 
+            }
+            if (currentTanookiState == TanookiEnums.TanookiFrames.DEATH)
+            {
+                if (currentTanookiframeIndex +1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
             }
             if (dead == true)
             {
