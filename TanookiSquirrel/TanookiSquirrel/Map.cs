@@ -39,6 +39,14 @@ namespace TanookiSquirrel
         Vector2 scaleSword = PixelItem.Items[TanookiEnums.PixelTypes.Sword].Sprite.Scale;
         Vector2 imageSizeSword = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Sword].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Sword].Sprite.image.Height);
 
+        //laserwall
+        Vector2 scaleLaserwall = PixelItem.Items[TanookiEnums.PixelTypes.LaserWall].Sprite.Scale;
+        Vector2 imageSizeLaserwall = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.LaserWall].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Sword].Sprite.image.Height);
+
+        //button
+        Vector2 scaleButton = PixelItem.Items[TanookiEnums.PixelTypes.Button].Sprite.Scale;
+        Vector2 imageSizeButton = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Button].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Button].Sprite.image.Height);
+
 
         public Map(Texture2D mapImage)
         {
@@ -89,7 +97,14 @@ namespace TanookiSquirrel
                     {
                         AddSprite(TanookiEnums.PixelTypes.Sword, position);
                     }
-                    
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Button].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Button, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.LaserWall].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.LaserWall, position);
+                    }
                     counter++;
                 }
             }

@@ -170,6 +170,7 @@ namespace TanookiSquirrel
                     isFalling = false;
                 }                
             }
+            
 
 
 
@@ -232,7 +233,7 @@ namespace TanookiSquirrel
             if (dead == true)
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Stone;
-               
+                
             }
             
 

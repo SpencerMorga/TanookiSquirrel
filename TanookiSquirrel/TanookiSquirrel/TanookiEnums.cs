@@ -29,7 +29,9 @@ namespace TanookiSquirrel
             Flag,
             Star,
             Sword,
-            Mush
+            Mush,
+            Button,
+            LaserWall
         }
         public enum TanookiFrames2
         {
