@@ -188,8 +188,8 @@ namespace TanookiSquirrel
             if (big)
             {
                 if (ks.IsKeyDown(Keys.D4)) {
-                    Scale = new Vector2(4f); acceleration = .8f; }
-                if (ks.IsKeyDown(Keys.D1)) { Scale = new Vector2(1f); acceleration = .008f; }
+                    Scale = new Vector2(4f); acceleration = .01f; }
+                if (ks.IsKeyDown(Keys.D1)) { Scale = new Vector2(1f); acceleration = .8f; }
                 if (ks.IsKeyDown(Keys.D3)) { Scale = new Vector2(3f); acceleration = .008f; }
                 if (ks.IsKeyDown(Keys.D2)) { Scale = new Vector2(2f); acceleration = .008f; }
                 if (ks.IsKeyDown(Keys.D5)) { Scale = new Vector2(5f); acceleration = .008f; }

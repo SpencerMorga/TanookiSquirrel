@@ -21,7 +21,7 @@ namespace TanookiSquirrel
         
         TheGenuineTanooki RaccoonDog;
         public Map map;
-        
+        int lvlcount = 1;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -65,7 +65,7 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.LaserWall, new PixelItem(Color.Brown, Content.Load<Texture2D>("laserwall"), Color.White, new Vector2(1f)));
             map = new Map(Content.Load<Texture2D>("map"));
             
-            RaccoonDog.yesFly = true;
+            RaccoonDog.yesFly = false;
           
 
         }
@@ -107,12 +107,30 @@ namespace TanookiSquirrel
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Flag][f].hitbox))
                     {
                         RaccoonDog.position = new Vector2(60, 570);
-                        map = new Map(Content.Load<Texture2D>("map2"));
+                        if (lvlcount == 1)
+                        {
+                            map = new Map(Content.Load<Texture2D>("map2"));
+                            lvlcount++;
+                        }
+                        else if (lvlcount == 2)
+                        {
+                            map = new Map(Content.Load<Texture2D>("map3"));
+                        }
+
                         break;
                     }
                 }
             }
-
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.RedWall))
+            {
+                for(int g = 0; g < map.Items[TanookiEnums.PixelTypes.RedWall].Count; g++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.RedWall][g].hitbox))
+                    {
+                        RaccoonDog.dead = true;
+                    }
+                }
+            }
             RaccoonDog.isFalling = true;
 
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
@@ -121,8 +139,8 @@ namespace TanookiSquirrel
                 {
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
                     {
-                        // RaccoonDog.isFalling = false;
-                        RaccoonDog.dead = true;
+                       RaccoonDog.isFalling = false;
+                      //  RaccoonDog.dead = true;
                     }
                 }
             }

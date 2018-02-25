@@ -47,6 +47,9 @@ namespace TanookiSquirrel
         Vector2 scaleButton = PixelItem.Items[TanookiEnums.PixelTypes.Button].Sprite.Scale;
         Vector2 imageSizeButton = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Button].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Button].Sprite.image.Height);
 
+        //poisonwall
+        Vector2 scaleRedWall = PixelItem.Items[TanookiEnums.PixelTypes.RedWall].Sprite.Scale;
+        Vector2 imageSizeRedWall = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.RedWall].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.RedWall].Sprite.image.Height);
 
         public Map(Texture2D mapImage)
         {
@@ -104,6 +107,10 @@ namespace TanookiSquirrel
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.LaserWall].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.LaserWall, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.RedWall].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.RedWall, position);
                     }
                     counter++;
                 }
