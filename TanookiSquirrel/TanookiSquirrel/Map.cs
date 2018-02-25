@@ -41,7 +41,7 @@ namespace TanookiSquirrel
 
         //laserwall
         Vector2 scaleLaserwall = PixelItem.Items[TanookiEnums.PixelTypes.LaserWall].Sprite.Scale;
-        Vector2 imageSizeLaserwall = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.LaserWall].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Sword].Sprite.image.Height);
+        Vector2 imageSizeLaserwall = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.LaserWall].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.LaserWall].Sprite.image.Height);
 
         //button
         Vector2 scaleButton = PixelItem.Items[TanookiEnums.PixelTypes.Button].Sprite.Scale;

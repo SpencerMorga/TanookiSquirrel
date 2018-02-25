@@ -34,7 +34,8 @@ namespace TanookiSquirrel
         public bool dead = false;
         public bool fight = false;
         public bool big = false;
-        float acceleration = .8f;
+    
+        float acceleration = .01f;
         float initialYSpeed;
 
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
@@ -186,15 +187,16 @@ namespace TanookiSquirrel
 
             if (big)
             {
-                if (ks.IsKeyDown(Keys.NumPad4)) { Scale = new Vector2(4f); acceleration = .8f; }
-                if (ks.IsKeyDown(Keys.NumPad1)) { Scale = new Vector2(1f); acceleration = .8f; }
-                if (ks.IsKeyDown(Keys.NumPad3)) { Scale = new Vector2(3f); acceleration = .8f; }
-                if (ks.IsKeyDown(Keys.NumPad2)) { Scale = new Vector2(2f); acceleration = .8f; }
-                if (ks.IsKeyDown(Keys.NumPad5)) { Scale = new Vector2(5f); acceleration = .8f; }
-                if (ks.IsKeyDown(Keys.NumPad9)) { Scale = new Vector2(9f); acceleration = .8f; }
-                if (ks.IsKeyDown(Keys.NumPad0))
+                if (ks.IsKeyDown(Keys.D4)) {
+                    Scale = new Vector2(4f); acceleration = .8f; }
+                if (ks.IsKeyDown(Keys.D1)) { Scale = new Vector2(1f); acceleration = .008f; }
+                if (ks.IsKeyDown(Keys.D3)) { Scale = new Vector2(3f); acceleration = .008f; }
+                if (ks.IsKeyDown(Keys.D2)) { Scale = new Vector2(2f); acceleration = .008f; }
+                if (ks.IsKeyDown(Keys.D5)) { Scale = new Vector2(5f); acceleration = .008f; }
+                if (ks.IsKeyDown(Keys.D9)) { Scale = new Vector2(9f); acceleration = .008f; }
+                if (ks.IsKeyDown(Keys.D0))
                 {
-                    Scale = new Vector2(.5f); acceleration = .01f;
+                    Scale = new Vector2(.5f); acceleration = 1f;
                 }
              
             }
@@ -232,11 +234,10 @@ namespace TanookiSquirrel
             }
             if (dead == true)
             {
-                currentTanookiState = TanookiEnums.TanookiFrames.Stone;
-                
+                position = new Vector2(60, 570);
+                dead = false;
             }
             
-
             if (currentTanookiState == TanookiEnums.TanookiFrames.Pull_Hat_Over_Head)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)

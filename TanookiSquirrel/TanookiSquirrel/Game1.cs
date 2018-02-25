@@ -52,9 +52,10 @@ namespace TanookiSquirrel
             graphics.ApplyChanges();
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 570), new Vector2(3), Color.White, new List<Frame>());
+            RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 490), new Vector2(3), Color.White, new List<Frame>());
             
             PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White, new Vector2(0.08f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.RedWall, new PixelItem(Color.BlanchedAlmond, Content.Load<Texture2D>("poisonwall"), Color.White, new Vector2(0.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Lava, new PixelItem(Color.Red, Content.Load<Texture2D>("lava"), Color.White, new Vector2(90f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Flag, new PixelItem(Color.Green, Content.Load<Texture2D>("flag"), Color.White, new Vector2(2.9f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Star, new PixelItem(Color.Yellow, Content.Load<Texture2D>("star"), Color.White, new Vector2(.01f)));
@@ -62,8 +63,9 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Sword, new PixelItem(Color.Blue, Content.Load<Texture2D>("sword"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Button, new PixelItem(Color.Purple, Content.Load<Texture2D>("button"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.LaserWall, new PixelItem(Color.Brown, Content.Load<Texture2D>("laserwall"), Color.White, new Vector2(1f)));
-            map = new Map(Content.Load<Texture2D>("map2"));
-            RaccoonDog.yesFly = false;
+            map = new Map(Content.Load<Texture2D>("map"));
+            
+            RaccoonDog.yesFly = true;
           
 
         }
@@ -97,6 +99,20 @@ namespace TanookiSquirrel
             // TODO: Add your update logic here
             RaccoonDog.Update(gameTime, ks);
 
+
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Flag))
+            { 
+                for (int f = 0; f < map.Items[TanookiEnums.PixelTypes.Flag].Count; f++)
+                { 
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Flag][f].hitbox))
+                    {
+                        RaccoonDog.position = new Vector2(60, 570);
+                        map = new Map(Content.Load<Texture2D>("map2"));
+                        break;
+                    }
+                }
+            }
+
             RaccoonDog.isFalling = true;
 
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
@@ -105,7 +121,8 @@ namespace TanookiSquirrel
                 {
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
                     {
-                        RaccoonDog.isFalling = false;
+                        // RaccoonDog.isFalling = false;
+                        RaccoonDog.dead = true;
                     }
                 }
             }
@@ -151,8 +168,28 @@ namespace TanookiSquirrel
 
                 }
             }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Button))
+            {
+                for (int d = 0; d < map.Items[TanookiEnums.PixelTypes.Button].Count; d++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Button][d].hitbox))
+                    {
 
-            
+                    }
+                }
+
+            }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.LaserWall))
+            {
+                for (int e = 0; e < map.Items[TanookiEnums.PixelTypes.LaserWall].Count; e++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.LaserWall][e].hitbox))
+                    {
+                        RaccoonDog.dead = true;
+
+                    }
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -162,7 +199,7 @@ namespace TanookiSquirrel
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {            
-            GraphicsDevice.Clear(Color.Lerp(Color.CornflowerBlue, Color.Gainsboro, .85f));
+            GraphicsDevice.Clear(Color.Gainsboro);
           //  GraphicsDevice.Clear(Color.Coral);
 
             spriteBatch.Begin();

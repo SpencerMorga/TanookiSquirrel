@@ -24,6 +24,7 @@ namespace TanookiSquirrel
         public enum PixelTypes
         {
             Wall,
+            RedWall,
             Water,
             Lava,
             Flag,
