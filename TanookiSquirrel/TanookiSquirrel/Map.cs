@@ -51,6 +51,8 @@ namespace TanookiSquirrel
         Vector2 scaleRedWall = PixelItem.Items[TanookiEnums.PixelTypes.RedWall].Sprite.Scale;
         Vector2 imageSizeRedWall = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.RedWall].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.RedWall].Sprite.image.Height);
 
+        //bowser
+   
         public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();

@@ -196,7 +196,7 @@ namespace TanookiSquirrel
                 if (ks.IsKeyDown(Keys.D9)) { Scale = new Vector2(9f); acceleration = .008f; }
                 if (ks.IsKeyDown(Keys.D0))
                 {
-                    Scale = new Vector2(.5f); acceleration = 1f;
+                    Scale = new Vector2(.1f); acceleration = .008f;
                 }
              
             }
