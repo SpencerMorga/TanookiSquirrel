@@ -35,7 +35,7 @@ namespace TanookiSquirrel
         public bool fight = false;
         public bool big = false;
     
-        float acceleration = .1f;
+        float acceleration = .3f;
         float initialYSpeed;
 
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
@@ -57,7 +57,6 @@ namespace TanookiSquirrel
                 new Frame(new Rectangle(419, 278, 24, 28), new Vector2()),
                 new Frame(new Rectangle(446, 279, 24, 27), new Vector2()),
                 new Frame(new Rectangle(473, 279, 24, 27), new Vector2()),
-
             };
             //  aneemayshun = new Dictionary<TanookiEnums.TanookiFrames, List<Rectangle>>();
             aneemayshun.Add(TanookiEnums.TanookiFrames.Flying, PSpeedFlying);
@@ -188,15 +187,15 @@ namespace TanookiSquirrel
             if (big)
             {
                 if (ks.IsKeyDown(Keys.D4)) {
-                    Scale = new Vector2(4f); acceleration = .01f; }
-                if (ks.IsKeyDown(Keys.D1)) { Scale = new Vector2(1f); acceleration = .8f; }
-                if (ks.IsKeyDown(Keys.D3)) { Scale = new Vector2(3f); acceleration = .008f; }
-                if (ks.IsKeyDown(Keys.D2)) { Scale = new Vector2(2f); acceleration = .008f; }
-                if (ks.IsKeyDown(Keys.D5)) { Scale = new Vector2(5f); acceleration = .008f; }
-                if (ks.IsKeyDown(Keys.D9)) { Scale = new Vector2(9f); acceleration = .008f; }
+                    Scale = new Vector2(4f); acceleration = .5f; }
+                if (ks.IsKeyDown(Keys.D1)) { Scale = new Vector2(1f); acceleration = .1f; }
+                if (ks.IsKeyDown(Keys.D3)) { Scale = new Vector2(3f); acceleration = .4f; }
+                if (ks.IsKeyDown(Keys.D2)) { Scale = new Vector2(2f); acceleration = .3f; }
+                if (ks.IsKeyDown(Keys.D5)) { Scale = new Vector2(5f); acceleration = .6f; }
+                if (ks.IsKeyDown(Keys.D9)) { Scale = new Vector2(9f); acceleration = 1f; }
                 if (ks.IsKeyDown(Keys.D0))
                 {
-                    Scale = new Vector2(.1f); acceleration = .008f;
+                    Scale = new Vector2(.1f); acceleration = .001f;
                 }
              
             }
