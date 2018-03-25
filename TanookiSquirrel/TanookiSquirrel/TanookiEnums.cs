@@ -33,7 +33,8 @@ namespace TanookiSquirrel
             Mush,
             Button,
             LaserWall,
-            Bowser
+            Bowser,
+            Shield
         }
         public enum TanookiFrames2
         {

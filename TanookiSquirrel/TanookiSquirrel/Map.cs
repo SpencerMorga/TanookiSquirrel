@@ -54,6 +54,10 @@ namespace TanookiSquirrel
         //bowser
         Vector2 scalebowser = PixelItem.Items[TanookiEnums.PixelTypes.Bowser].Sprite.Scale;
         Vector2 imageSizebowser = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Bowser].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Bowser].Sprite.image.Height);
+
+        //shield
+        Vector2 scaleshield = PixelItem.Items[TanookiEnums.PixelTypes.Shield].Sprite.Scale;
+        Vector2 imageSizeshield = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Shield].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Shield].Sprite.image.Height);
         public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -118,16 +122,10 @@ namespace TanookiSquirrel
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Bowser].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.Bowser, position);
-
-
-
-
-
-
-
-
-
-
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Shield].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Shield, position);
                     }
                     counter++;
                 }

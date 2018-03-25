@@ -34,8 +34,8 @@ namespace TanookiSquirrel
         public bool dead = false;
         public bool fight = false;
         public bool big = false;
-    
-        float acceleration = .3f;
+        public bool shield = false;
+        float acceleration = .2f;
         float initialYSpeed;
 
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
