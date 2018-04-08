@@ -27,6 +27,7 @@ namespace TanookiSquirrel
         public virtual void Update(GameTime gTime)
         {
             elaspedtanookiTime += gTime.ElapsedGameTime;
+            
             if (elaspedtanookiTime > Time2wait4tanooki)
             {
                 currentTanookiframeIndex++;

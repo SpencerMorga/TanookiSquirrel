@@ -22,6 +22,7 @@ namespace TanookiSquirrel
         TheGenuineTanooki RaccoonDog;
         public Map map;
         int lvlcount = 1;
+        public TimeSpan shieldTime = new TimeSpan(0, 0, 0, 3, 0);
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -65,6 +66,7 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.LaserWall, new PixelItem(Color.Brown, Content.Load<Texture2D>("laserwall"), Color.White, new Vector2(.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Bowser, new PixelItem(Color.Olive, Content.Load<Texture2D>("bowser6"), Color.White, new Vector2(.2f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Shield, new PixelItem(Color.Orange, Content.Load<Texture2D>("shield"), Color.PapayaWhip, new Vector2(.1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Goomba, new PixelItem(Color.Gold, Content.Load<Texture2D>("goomba"), Color.White, new Vector2(2.8f)));
             map = new Map(Content.Load<Texture2D>("map"));
             
             RaccoonDog.yesFly = true;
@@ -127,13 +129,14 @@ namespace TanookiSquirrel
                     }
                 }
             }
-            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Shield))
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Shield) && !RaccoonDog.shield)
             {
                 for (int y = 0; y < map.Items[TanookiEnums.PixelTypes.Shield].Count; y++)
                 {
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Shield][y].hitbox) && !RaccoonDog.shield)
                     {
                         RaccoonDog.shield = true;
+                        RaccoonDog.invincible = true;
                     }
                 }
             }
@@ -156,19 +159,40 @@ namespace TanookiSquirrel
                     }
                 }
             }
-            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.RedWall))
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Goomba))
             {
-                for(int g = 0; g < map.Items[TanookiEnums.PixelTypes.RedWall].Count; g++)
+                for (int m = 0; m < map.Items[TanookiEnums.PixelTypes.Goomba].Count; m++)
                 {
-                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.RedWall][g].hitbox) && !RaccoonDog.shield)
-                    { 
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Goomba][m].hitbox) && !RaccoonDog.shield)
                         if (!RaccoonDog.shield)
-                        { 
+                        {
                             RaccoonDog.dead = true;
                         }
                         else
                         {
                             RaccoonDog.shield = false;
+                        }
+                }
+            }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.RedWall))
+            {
+                for(int g = 0; g < map.Items[TanookiEnums.PixelTypes.RedWall].Count; g++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.RedWall][g].hitbox) )
+                    { 
+                        if (!RaccoonDog.shield)
+                        { 
+                            RaccoonDog.dead = true;
+                        }
+                        else if(shieldTime == TimeSpan.Zero)
+                        {
+                            //RaccoonDog.shield = false;
+                            RaccoonDog.invincible = true;
+                            //we start ticking a timespan that counts as long as our invulnerablity time
+                            //set a bool to true possibly, and outside of this if, check if that bool is true, if it is add to the timespan
+                            //during the timer, we are invulnerable
+                            //after the timer, we are able to be hit again
+                            shieldTime = TimeSpan.Zero;
                         }
                     }
                 }
@@ -230,7 +254,17 @@ namespace TanookiSquirrel
                 }
             }
             
-           
+           if (RaccoonDog.invincible == true)
+            {
+                shieldTime += gameTime.ElapsedGameTime;
+
+                if(shieldTime > TimeSpan.FromMilliseconds(2000))
+                {
+                    RaccoonDog.invincible = false;
+                    RaccoonDog.shield = false;
+                    shieldTime = TimeSpan.Zero;
+                }
+            }
             base.Update(gameTime);
         }
 

@@ -35,6 +35,7 @@ namespace TanookiSquirrel
         public bool fight = false;
         public bool big = false;
         public bool shield = false;
+        public bool invincible = false;
         float acceleration = .2f;
         float initialYSpeed;
 
