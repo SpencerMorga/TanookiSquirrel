@@ -65,11 +65,12 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Button, new PixelItem(Color.Purple, Content.Load<Texture2D>("button"), Color.White, new Vector2(0.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.LaserWall, new PixelItem(Color.Brown, Content.Load<Texture2D>("laserwall"), Color.White, new Vector2(.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Bowser, new PixelItem(Color.Olive, Content.Load<Texture2D>("bowser6"), Color.White, new Vector2(.2f)));
-            PixelItem.AddItem(TanookiEnums.PixelTypes.Shield, new PixelItem(Color.Orange, Content.Load<Texture2D>("shield"), Color.PapayaWhip, new Vector2(.1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Shield, new PixelItem(Color.Orange, Content.Load<Texture2D>("shield"), Color.White, new Vector2(.1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Goomba, new PixelItem(Color.Gold, Content.Load<Texture2D>("goomba"), Color.White, new Vector2(2.8f)));
-            map = new Map(Content.Load<Texture2D>("map"));
+            map = new Map(Content.Load<Texture2D>("map4"));
             
             RaccoonDog.yesFly = true;
+            RaccoonDog.big = true;
           
 
         }
@@ -258,7 +259,7 @@ namespace TanookiSquirrel
             {
                 shieldTime += gameTime.ElapsedGameTime;
 
-                if(shieldTime > TimeSpan.FromMilliseconds(2000))
+                if(shieldTime > TimeSpan.FromSeconds(10))
                 {
                     RaccoonDog.invincible = false;
                     RaccoonDog.shield = false;
@@ -275,7 +276,7 @@ namespace TanookiSquirrel
         protected override void Draw(GameTime gameTime)
         {            
             GraphicsDevice.Clear(Color.Gainsboro);
-          //  GraphicsDevice.Clear(Color.Coral);
+           // GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 
