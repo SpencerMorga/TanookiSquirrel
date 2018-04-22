@@ -35,7 +35,8 @@ namespace TanookiSquirrel
             LaserWall,
             Bowser,
             Shield,
-            Goomba
+            Goomba,
+            Revshield
         }
         public enum TanookiFrames2
         {
