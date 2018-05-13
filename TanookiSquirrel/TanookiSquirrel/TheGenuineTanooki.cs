@@ -36,6 +36,7 @@ namespace TanookiSquirrel
         public bool big = false;
         public bool shield = false;
         public bool invincible = false;
+        public bool hasReverseShield = false;
         float acceleration = .2f;
         float initialYSpeed;
 
@@ -115,11 +116,39 @@ namespace TanookiSquirrel
             };
             aneemayshun.Add(TanookiEnums.TanookiFrames.Swimming, Swimming);
 
+            List<Frame> Fwalking = new List<Frame>()
+            {
+                new Frame(new Rectangle(312, 238, 15, 31), new Vector2()),
+                new Frame(new Rectangle(330, 238, 15, 31), new Vector2()),
+                new Frame(new Rectangle(348, 239, 16, 30), new Vector2()),
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Fwalk, Fwalking);
+
+            List<Frame> Fleaping = new List<Frame>()
+            {
+                new Frame(new Rectangle(225, 240, 20, 29), new Vector2()),
+                new Frame(new Rectangle(248, 240, 20, 29), new Vector2()),
+                new Frame(new Rectangle(271, 240, 19, 30), new Vector2()),
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Fleap, Fleaping);
+            List<Frame> Fwimming = new List<Frame>()
+            {
+                new Frame(new Rectangle(558, 243, 20, 27), new Vector2()),
+                new Frame(new Rectangle(581, 243, 20, 27), new Vector2()),
+                new Frame(new Rectangle(606, 243, 24, 27), new Vector2()),
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Fwim, Fwimming);
+
+            List<Frame> Fwalling = new List<Frame>()
+            {
+                new Frame(new Rectangle(482, 245, 16, 25), new Vector2()),
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Fwall, Fwalling);
             currentTanookiState = TanookiEnums.TanookiFrames.Idle;
             this.frames = aneemayshun[currentTanookiState];
         }
 
-        
+
 
         public void Update(GameTime gTime, KeyboardState ks)
         {
@@ -169,9 +198,9 @@ namespace TanookiSquirrel
                     currentTanookiState = TanookiEnums.TanookiFrames.Flying;
                     position.Y -= speed.Y;
                     isFalling = false;
-                }                
+                }
             }
-            
+
 
 
 
@@ -196,11 +225,11 @@ namespace TanookiSquirrel
                 if (ks.IsKeyDown(Keys.D9)) { Scale = new Vector2(9f); acceleration = 1f; }
                 if (ks.IsKeyDown(Keys.D0))
                 {
-                    Scale = new Vector2(.1f); acceleration = .001f;
+                    Scale = new Vector2(.1f); acceleration = .000000000000001f;
                 }
-             
+
             }
-           
+
             if (ks.IsKeyDown(Keys.A))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Idle;
@@ -214,9 +243,9 @@ namespace TanookiSquirrel
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-            
-            
-            
+
+
+
             if (currentTanookiState == TanookiEnums.TanookiFrames.Stone)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
@@ -227,7 +256,7 @@ namespace TanookiSquirrel
             }
             if (currentTanookiState == TanookiEnums.TanookiFrames.DEATH)
             {
-                if (currentTanookiframeIndex +1 >= frames.Count)
+                if (currentTanookiframeIndex + 1 >= frames.Count)
                 {
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
@@ -237,7 +266,7 @@ namespace TanookiSquirrel
                 position = new Vector2(60, 570);
                 dead = false;
             }
-            
+
             if (currentTanookiState == TanookiEnums.TanookiFrames.Pull_Hat_Over_Head)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
@@ -251,25 +280,66 @@ namespace TanookiSquirrel
                 currentTanookiState = TanookiEnums.TanookiFrames.Pull_Hat_Over_Head;
             }
 
-            if (currentTanookiState == TanookiEnums.TanookiFrames.Tumbling)
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Fwalk)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
                 {
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
+
             if (ks.IsKeyDown(Keys.Right))
             {
-                currentTanookiState = TanookiEnums.TanookiFrames.Tumbling;
+                currentTanookiState = TanookiEnums.TanookiFrames.Fwalk;
                 position.X += speed.X;
             }
+
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Fleap)
+            {
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
+            if (ks.IsKeyDown(Keys.Up))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Fleap;
+                position.Y -= speed.Y;
+            }
+
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Fwim)
+            {
+                if (currentTanookiframeIndex +1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
+            if (ks.IsKeyDown(Keys.Left))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Fwim;
+                position.X += speed.X;
+            }
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Fwall)
+            {
+                if (currentTanookiframeIndex +1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
+            if (ks.IsKeyDown(Keys.S))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Fwall;
+                position.Y += speed.Y;
+            }
+
 
             if (currentTanookiState == TanookiEnums.TanookiFrames.SpinAttack)
             {
 
                 if (currentTanookiframeIndex + 1 >= frames.Count)
                 {
-                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                    currentTanookiState = TanookiEnums.TanookiFrames.SpinAttack;
+                
                 }
 
             }
@@ -282,11 +352,7 @@ namespace TanookiSquirrel
                 }
             }
             
-            if (ks.IsKeyDown(Keys.Left))
-            {
-                currentTanookiState = TanookiEnums.TanookiFrames.Swimming;
-                position.X += speed.X;
-            }
+           
 
            
             base.Update(gTime);

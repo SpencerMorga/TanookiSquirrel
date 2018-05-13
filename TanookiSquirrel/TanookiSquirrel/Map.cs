@@ -62,9 +62,14 @@ namespace TanookiSquirrel
         //goomba
         Vector2 scalegoomba = PixelItem.Items[TanookiEnums.PixelTypes.Goomba].Sprite.Scale;
         Vector2 imageSizegoomba = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Goomba].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Shield].Sprite.image.Height);
-
+        
+        //reverseshield
         Vector2 scalerevshield = PixelItem.Items[TanookiEnums.PixelTypes.Revshield].Sprite.Scale;
         Vector2 imageSizerevshield = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Revshield].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Revshield].Sprite.image.Height);
+
+        //secret flag
+        Vector2 scalesecretflag = PixelItem.Items[TanookiEnums.PixelTypes.SecretFlag].Sprite.Scale;
+        Vector2 imageSizesecretflag = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.SecretFlag].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.SecretFlag].Sprite.image.Height);
             public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -141,6 +146,10 @@ namespace TanookiSquirrel
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Revshield].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.Revshield, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.SecretFlag].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.SecretFlag, position);
                     }
                     counter++;
                 }

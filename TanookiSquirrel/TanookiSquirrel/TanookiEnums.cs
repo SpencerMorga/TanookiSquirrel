@@ -18,7 +18,11 @@ namespace TanookiSquirrel
             Stone, //
             Pull_Hat_Over_Head,
             SpinAttack,
-            DEATH
+            DEATH,
+            Fleap,
+            Fwalk,
+            Fwim,
+            Fwall
         }
 
         public enum PixelTypes
@@ -36,7 +40,8 @@ namespace TanookiSquirrel
             Bowser,
             Shield,
             Goomba,
-            Revshield
+            Revshield,
+            SecretFlag
         }
         public enum TanookiFrames2
         {
