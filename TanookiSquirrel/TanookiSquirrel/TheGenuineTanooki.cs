@@ -118,9 +118,9 @@ namespace TanookiSquirrel
 
             List<Frame> Fwalking = new List<Frame>()
             {
-                new Frame(new Rectangle(312, 238, 15, 31), new Vector2()),
-                new Frame(new Rectangle(330, 238, 15, 31), new Vector2()),
-                new Frame(new Rectangle(348, 239, 16, 30), new Vector2()),
+                new Frame(new Rectangle(229, 208, 16, 28), new Vector2()),
+                new Frame(new Rectangle(248, 209, 16, 27), new Vector2()),
+                new Frame(new Rectangle(211, 208, 16, 28), new Vector2()),
             };
             aneemayshun.Add(TanookiEnums.TanookiFrames.Fwalk, Fwalking);
 
@@ -144,6 +144,12 @@ namespace TanookiSquirrel
                 new Frame(new Rectangle(482, 245, 16, 25), new Vector2()),
             };
             aneemayshun.Add(TanookiEnums.TanookiFrames.Fwall, Fwalling);
+
+            List<Frame> Fly2 = new List<Frame>()
+            {
+                new Frame(new Rectangle(409, 209, 19, 27), new Vector2()),
+            };
+            aneemayshun.Add(TanookiEnums.TanookiFrames.Fly2, Fly2);
             currentTanookiState = TanookiEnums.TanookiFrames.Idle;
             this.frames = aneemayshun[currentTanookiState];
         }
@@ -191,11 +197,24 @@ namespace TanookiSquirrel
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
+            if (currentTanookiState == TanookiEnums.TanookiFrames.Fly2)
+            {
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
+                }
+            }
             if (yesFly == true)
             {
                 if (ks.IsKeyDown(Keys.W))
                 {
                     currentTanookiState = TanookiEnums.TanookiFrames.Flying;
+                    position.Y -= speed.Y;
+                    isFalling = false;
+                }
+                if (ks.IsKeyDown(Keys.K))
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.Fly2;
                     position.Y -= speed.Y;
                     isFalling = false;
                 }

@@ -72,10 +72,11 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Goomba, new PixelItem(Color.Gold, Content.Load<Texture2D>("goomba"), Color.White, new Vector2(2.8f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Revshield, new PixelItem(Color.DarkKhaki, Content.Load<Texture2D>("reverseshield"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.SecretFlag, new PixelItem(Color.Aquamarine, Content.Load<Texture2D>("secret"), Color.White, new Vector2(1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.CheepCheep, new PixelItem(Color.CornflowerBlue, Content.Load<Texture2D>("cheepcheep"), Color.White, new Vector2(3f)));]
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Cactus, new PixelItem(Color.YellowGreen, Content.Load<Texture2D>("cactus"), Color.White, new Vector2(5f));
             map = new Map(Content.Load<Texture2D>("map"));
             
-            RaccoonDog.yesFly = true;
-            RaccoonDog.big = true;
+           
           
 
         }

@@ -22,7 +22,8 @@ namespace TanookiSquirrel
             Fleap,
             Fwalk,
             Fwim,
-            Fwall
+            Fwall,
+            Fly2
         }
 
         public enum PixelTypes
@@ -41,7 +42,10 @@ namespace TanookiSquirrel
             Shield,
             Goomba,
             Revshield,
-            SecretFlag
+            SecretFlag,
+            CheepCheep,
+            Cactus,
+            Coral
         }
         public enum TanookiFrames2
         {

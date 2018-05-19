@@ -79,13 +79,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="star.png">
-      <Name>star</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="sword.png">
       <Name>sword</Name>
       <Importer>TextureImporter</Importer>
@@ -221,6 +214,27 @@
   <ItemGroup>
     <Compile Include="map6.png">
       <Name>map6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cheepcheep.png">
+      <Name>cheepcheep</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cactus.png">
+      <Name>cactus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="coral.png">
+      <Name>coral</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
