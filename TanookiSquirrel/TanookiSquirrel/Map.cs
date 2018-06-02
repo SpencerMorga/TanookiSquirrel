@@ -70,6 +70,22 @@ namespace TanookiSquirrel
         //secret flag
         Vector2 scalesecretflag = PixelItem.Items[TanookiEnums.PixelTypes.SecretFlag].Sprite.Scale;
         Vector2 imageSizesecretflag = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.SecretFlag].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.SecretFlag].Sprite.image.Height);
+
+        //cheep cheep
+        Vector2 scalecheepcheep = PixelItem.Items[TanookiEnums.PixelTypes.CheepCheep].Sprite.Scale;
+        Vector2 imageSizecheepcheep = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.CheepCheep].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.CheepCheep].Sprite.image.Height);
+
+        //coral
+        Vector2 scalecoral = PixelItem.Items[TanookiEnums.PixelTypes.Coral].Sprite.Scale;
+        Vector2 imageSizecoral = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Coral].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Coral].Sprite.image.Height);
+
+        //cactus thingy
+        Vector2 scalecactus = PixelItem.Items[TanookiEnums.PixelTypes.Cactus].Sprite.Scale;
+        Vector2 imageSizecactus = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Cactus].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Cactus].Sprite.image.Height);
+
+        //actual water
+        Vector2 scalewater = PixelItem.Items[TanookiEnums.PixelTypes.Water].Sprite.Scale;
+        Vector2 imageSizewater = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Water].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Water].Sprite.image.Height);
             public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -150,6 +166,22 @@ namespace TanookiSquirrel
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.SecretFlag].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.SecretFlag, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.CheepCheep].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.CheepCheep, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Coral].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Coral, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Cactus].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Cactus, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Water].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Water, position);
                     }
                     counter++;
                 }

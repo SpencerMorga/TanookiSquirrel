@@ -72,12 +72,14 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Goomba, new PixelItem(Color.Gold, Content.Load<Texture2D>("goomba"), Color.White, new Vector2(2.8f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Revshield, new PixelItem(Color.DarkKhaki, Content.Load<Texture2D>("reverseshield"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.SecretFlag, new PixelItem(Color.Aquamarine, Content.Load<Texture2D>("secret"), Color.White, new Vector2(1f)));
-            PixelItem.AddItem(TanookiEnums.PixelTypes.CheepCheep, new PixelItem(Color.CornflowerBlue, Content.Load<Texture2D>("cheepcheep"), Color.White, new Vector2(3f)));]
-            PixelItem.AddItem(TanookiEnums.PixelTypes.Cactus, new PixelItem(Color.YellowGreen, Content.Load<Texture2D>("cactus"), Color.White, new Vector2(5f));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.CheepCheep, new PixelItem(Color.CornflowerBlue, Content.Load<Texture2D>("cheepcheep"), Color.White, new Vector2(3f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Cactus, new PixelItem(Color.YellowGreen, Content.Load<Texture2D>("cactus"), Color.White, new Vector2(1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Coral, new PixelItem(Color.DarkBlue, Content.Load<Texture2D>("coral"), Color.White, new Vector2(2.5f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Water, new PixelItem(Color.DodgerBlue, Content.Load<Texture2D>("actual water"), Color.White, new Vector2(1f)));
             map = new Map(Content.Load<Texture2D>("map"));
-            
-           
-          
+
+            RaccoonDog.yesFly = true;
+            RaccoonDog.big = true;
 
         }
 
@@ -107,7 +109,7 @@ namespace TanookiSquirrel
             // TODO: Add your update logic here
             RaccoonDog.Update(gameTime, ks);
 
-
+            
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Flag))
             { 
                 for (int f = 0; f < map.Items[TanookiEnums.PixelTypes.Flag].Count; f++)
@@ -143,20 +145,10 @@ namespace TanookiSquirrel
                         RaccoonDog.position = new Vector2(60, 570);
                         if (lvlcount == 3)
                         {
-                            lvlcount += 2;
-                            map = new Map(Content.Load<Texture2D>("map5"));
+                            
+                            map = new Map(Content.Load<Texture2D>("water"));
+                 
                         }
-                        if (lvlcount == 5)
-                        {
-                            lvlcount++;
-                            map = new Map(Content.Load<Texture2D>("map6"));
-                        }
-                        /*
-                        if (lvlcount == 6)
-                        {
-                            map = new Map(Content.Load<Texture2D>("map6"));
-                        }
-                        */
                         break;
                     }
                 }
@@ -172,6 +164,17 @@ namespace TanookiSquirrel
                     }
                 }
             }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Cactus))
+            {
+                for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Cactus].Count; i++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Cactus][i].hitbox))
+                    {
+                        RaccoonDog.isFalling = false;
+                    }
+                }
+            }
+
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Bowser))
             {
               for(int z = 0; z < map.Items[TanookiEnums.PixelTypes.Bowser].Count; z++)
@@ -355,7 +358,7 @@ namespace TanookiSquirrel
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {            
-            GraphicsDevice.Clear(Color.Gainsboro);
+            GraphicsDevice.Clear(Color.White);
            // GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
