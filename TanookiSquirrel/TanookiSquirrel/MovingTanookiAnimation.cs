@@ -15,6 +15,7 @@ namespace TanookiSquirrel
             : base (image, position, color, frames)
         {
             this.speed = speed;
+            this.frames = frames;
         }
         public override void Update(GameTime gTime)
         {

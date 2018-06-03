@@ -81,6 +81,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="ReverseFrames.cs" />
+    <Compile Include="spiny.cs" />
     <Compile Include="TanookiAnimation.cs" />
     <Compile Include="TanookiEnemies.cs" />
     <Compile Include="TanookiEnums.cs" />

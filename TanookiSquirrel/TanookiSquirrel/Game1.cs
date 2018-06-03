@@ -25,7 +25,12 @@ namespace TanookiSquirrel
         public TimeSpan shieldTime = new TimeSpan(0, 0, 0, 3, 0);
         public TimeSpan revshieldTime = new TimeSpan(0, 0, 0, 3, 0);
 
-        
+        Texture2D spinyimage;
+        Vector2 spinyposition;
+        Color spinycolor;
+        Frame spinyframes;
+
+        spiny spinymoves;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -56,6 +61,12 @@ namespace TanookiSquirrel
             graphics.ApplyChanges();
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+           // spinyframes = new spiny(Content.Load<Texture2D>("enemies"), new Vector2(500, 500), Color.White, new List<Frame>());
+         
+
+
+
             RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 550), new Vector2(3), Color.White, new List<Frame>());
             
             PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White, new Vector2(0.08f)));
@@ -124,13 +135,20 @@ namespace TanookiSquirrel
                         }
                         else if (lvlcount == 2)
                         {
-                            lvlcount++;
+                            
                             map = new Map(Content.Load<Texture2D>("map3"));
+                            lvlcount++;
                         }
                         else if (lvlcount == 3)
                         {
                             
                             map = new Map(Content.Load<Texture2D>("map4"));
+                            lvlcount++;
+                        }
+                        else if (lvlcount == 4)
+                        {
+                            map = new Map(Content.Load<Texture2D>("map5"));
+                            lvlcount++;
                         }
                         break;
                     }
@@ -164,16 +182,7 @@ namespace TanookiSquirrel
                     }
                 }
             }
-            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Cactus))
-            {
-                for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Cactus].Count; i++)
-                {
-                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Cactus][i].hitbox))
-                    {
-                        RaccoonDog.isFalling = false;
-                    }
-                }
-            }
+            
 
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Bowser))
             {
@@ -283,6 +292,16 @@ namespace TanookiSquirrel
                     }
                 }
             }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Cactus))
+            {
+                for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Cactus].Count; i++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Cactus][i].hitbox))
+                    {
+                        RaccoonDog.isFalling = false;
+                    }
+                }
+            }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Mush))
             { 
                 for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Mush].Count; j++)
@@ -358,7 +377,11 @@ namespace TanookiSquirrel
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {            
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
+            if (map = new Map(Content.Load<Texture2D>("water")))
+            {
+
+            }
            // GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
