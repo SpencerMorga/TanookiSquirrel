@@ -24,13 +24,8 @@ namespace TanookiSquirrel
         int lvlcount = 1;
         public TimeSpan shieldTime = new TimeSpan(0, 0, 0, 3, 0);
         public TimeSpan revshieldTime = new TimeSpan(0, 0, 0, 3, 0);
-
-        Texture2D spinyimage;
-        Vector2 spinyposition;
-        Color spinycolor;
-        Frame spinyframes;
-
-        spiny spinymoves;
+        
+        Color colorswitch = Color.White;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -87,10 +82,11 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Cactus, new PixelItem(Color.YellowGreen, Content.Load<Texture2D>("cactus"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Coral, new PixelItem(Color.DarkBlue, Content.Load<Texture2D>("coral"), Color.White, new Vector2(2.5f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Water, new PixelItem(Color.DodgerBlue, Content.Load<Texture2D>("actual water"), Color.White, new Vector2(1f)));
-            map = new Map(Content.Load<Texture2D>("map"));
+            map = new Map(Content.Load<Texture2D>("map5"));
 
             RaccoonDog.yesFly = true;
             RaccoonDog.big = true;
+           
 
         }
 
@@ -165,7 +161,7 @@ namespace TanookiSquirrel
                         {
                             
                             map = new Map(Content.Load<Texture2D>("water"));
-                 
+                            colorswitch = Color.DodgerBlue;
                         }
                         break;
                     }
@@ -203,21 +199,7 @@ namespace TanookiSquirrel
                     }
                 }
             }
-            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Goomba))
-            {
-                for (int m = 0; m < map.Items[TanookiEnums.PixelTypes.Goomba].Count; m++)
-                {
-                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Goomba][m].hitbox) && !RaccoonDog.shield)
-                        if (!RaccoonDog.shield)
-                        {
-                            RaccoonDog.dead = true;
-                        }
-                        else
-                        {
-                            RaccoonDog.shield = false;
-                        }
-                }
-            }
+           
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.RedWall))
             {
                 for(int g = 0; g < map.Items[TanookiEnums.PixelTypes.RedWall].Count; g++)
@@ -280,18 +262,7 @@ namespace TanookiSquirrel
 
 
 
-                if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
-            {
-                for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Wall].Count; i++)
-                {
-                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
-                    {
-                       RaccoonDog.isFalling = false;
-                        //RaccoonDog.dead = true;
-                      
-                    }
-                }
-            }
+               
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Cactus))
             {
                 for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Cactus].Count; i++)
@@ -323,7 +294,55 @@ namespace TanookiSquirrel
                     }
                 }
             }
-
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.CheepCheep))
+            {
+                for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.CheepCheep].Count; i++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.CheepCheep][i].hitbox) && RaccoonDog.fight)
+                    {
+                        map.Items[TanookiEnums.PixelTypes.CheepCheep].RemoveAt(i);
+                        i--;
+                    }
+                    else if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.CheepCheep][i].hitbox) && !RaccoonDog.shield)
+                    {
+                        RaccoonDog.dead = true;
+                    }
+                     
+                    
+                }
+            }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
+            {
+                for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Wall].Count; i++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox) && RaccoonDog.fight)
+                    {
+                        map.Items[TanookiEnums.PixelTypes.Wall].RemoveAt(i);
+                        i--;
+                    }
+                    else if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
+                    {
+                       RaccoonDog.isFalling = false;
+                        //RaccoonDog.dead = true;
+                      
+                    }
+                }
+            }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Goomba))
+                {
+                    for (int m = 0; m < map.Items[TanookiEnums.PixelTypes.Goomba].Count; m++)
+                    {
+                        if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Goomba][m].hitbox) && RaccoonDog.fight)
+                    {
+                        map.Items[TanookiEnums.PixelTypes.Goomba].RemoveAt(m);
+                        m--;
+                    }
+                        else if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Goomba][m].hitbox) && !RaccoonDog.shield)
+                        {
+                        RaccoonDog.dead = true;
+                        }
+                }
+            }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Sword))
             {
                 for (int b = 0; b < map.Items[TanookiEnums.PixelTypes.Sword].Count; b++)
@@ -377,13 +396,7 @@ namespace TanookiSquirrel
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {            
-            GraphicsDevice.Clear(Color.Black);
-            if (map = new Map(Content.Load<Texture2D>("water")))
-            {
-
-            }
-           // GraphicsDevice.Clear(Color.Black);
-
+            GraphicsDevice.Clear(colorswitch);
             spriteBatch.Begin();
 
             map.Draw(spriteBatch);

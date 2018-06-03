@@ -38,6 +38,7 @@ namespace TanookiSquirrel
         public bool invincible = false;
         public bool hasReverseShield = false;
         public float acceleration = .2f;
+      //  public bool attacking = false;
         float initialYSpeed;
 
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
@@ -362,13 +363,21 @@ namespace TanookiSquirrel
                 }
 
             }
-            if (fight == true)
-            {
+           
                 if (ks.IsKeyDown(Keys.Space)) 
                 {
-                    currentTanookiState = TanookiEnums.TanookiFrames.SpinAttack;
-                    position.X += speed.X;
+                    fight = true;
+                    
+
                 }
+            if (fight == true)
+            {
+                    currentTanookiState = TanookiEnums.TanookiFrames.SpinAttack;
+                    //position.X += speed.X;
+            }
+            if (ks.IsKeyUp(Keys.Space))
+            {
+                fight = false;
             }
             
            
