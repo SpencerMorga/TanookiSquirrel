@@ -82,7 +82,8 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Cactus, new PixelItem(Color.YellowGreen, Content.Load<Texture2D>("cactus"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Coral, new PixelItem(Color.DarkBlue, Content.Load<Texture2D>("coral"), Color.White, new Vector2(2.5f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Water, new PixelItem(Color.DodgerBlue, Content.Load<Texture2D>("actual water"), Color.White, new Vector2(1f)));
-            map = new Map(Content.Load<Texture2D>("map5"));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Coin, new PixelItem(Color.Firebrick, Content.Load<Texture2D>("coin"), Color.White, new Vector2(1f)));
+            map = new Map(Content.Load<Texture2D>("map"));
 
             RaccoonDog.yesFly = true;
             RaccoonDog.big = true;
@@ -137,7 +138,7 @@ namespace TanookiSquirrel
                         }
                         else if (lvlcount == 3)
                         {
-                            
+                            colorswitch = Color.White;
                             map = new Map(Content.Load<Texture2D>("map4"));
                             lvlcount++;
                         }
@@ -145,9 +146,10 @@ namespace TanookiSquirrel
                         {
                             map = new Map(Content.Load<Texture2D>("map5"));
                             lvlcount++;
+                            colorswitch = Color.White;
                         }
                         break;
-                    }
+                    }  
                 }
             }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.SecretFlag))
@@ -159,9 +161,11 @@ namespace TanookiSquirrel
                         RaccoonDog.position = new Vector2(60, 570);
                         if (lvlcount == 3)
                         {
-                            
+                            RaccoonDog.position.Y += RaccoonDog.speed.Y;
+                            RaccoonDog.acceleration = 0.0000000001f;
                             map = new Map(Content.Load<Texture2D>("water"));
                             colorswitch = Color.DodgerBlue;
+                            
                         }
                         break;
                     }
@@ -311,16 +315,28 @@ namespace TanookiSquirrel
                     
                 }
             }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Coin))
+            {
+                for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Coin].Count; i++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Coin][i].hitbox))
+                    {
+                        map.Items[TanookiEnums.PixelTypes.Coin].RemoveAt(i);
+                    }
+                }
+            }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
             {
                 for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Wall].Count; i++)
                 {
+                    /*
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox) && RaccoonDog.fight)
                     {
                         map.Items[TanookiEnums.PixelTypes.Wall].RemoveAt(i);
                         i--;
                     }
-                    else if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
+
+                    else */ if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
                     {
                        RaccoonDog.isFalling = false;
                         //RaccoonDog.dead = true;
@@ -349,7 +365,7 @@ namespace TanookiSquirrel
                 {
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Sword][b].hitbox))
                     {
-                        RaccoonDog.fight = true;
+                        RaccoonDog.attacking = true;
                     }
                 }
             }

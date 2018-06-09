@@ -86,6 +86,10 @@ namespace TanookiSquirrel
         //actual water
         Vector2 scalewater = PixelItem.Items[TanookiEnums.PixelTypes.Water].Sprite.Scale;
         Vector2 imageSizewater = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Water].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Water].Sprite.image.Height);
+
+        //coin
+        Vector2 scalecoin = PixelItem.Items[TanookiEnums.PixelTypes.Coin].Sprite.Scale;
+        Vector2 imageSizecoin = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Coin].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Coin].Sprite.image.Height);
             public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -182,6 +186,10 @@ namespace TanookiSquirrel
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Water].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.Water, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Coin].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Coin, position);
                     }
                     counter++;
                 }

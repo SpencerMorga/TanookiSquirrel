@@ -45,7 +45,8 @@ namespace TanookiSquirrel
             SecretFlag,
             CheepCheep,
             Cactus,
-            Coral
+            Coral,
+            Coin
         }
         public enum TanookiFrames2
         {
