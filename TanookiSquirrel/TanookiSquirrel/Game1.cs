@@ -18,14 +18,17 @@ namespace TanookiSquirrel
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
+        int count = 0;
+        Labels label;
         TheGenuineTanooki RaccoonDog;
         public Map map;
         int lvlcount = 1;
         public TimeSpan shieldTime = new TimeSpan(0, 0, 0, 3, 0);
         public TimeSpan revshieldTime = new TimeSpan(0, 0, 0, 3, 0);
-        
+
         Color colorswitch = Color.White;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -56,14 +59,9 @@ namespace TanookiSquirrel
             graphics.ApplyChanges();
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-           // spinyframes = new spiny(Content.Load<Texture2D>("enemies"), new Vector2(500, 500), Color.White, new List<Frame>());
-         
-
-
-
-            RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 550), new Vector2(3), Color.White, new List<Frame>());
+            label = new Labels(Content.Load<SpriteFont>("font"), $"Coins: {count}", new Vector2(50, 50), Color.Blue);
             
+            RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 550), new Vector2(3), Color.White, new List<Frame>());
             PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White, new Vector2(0.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.RedWall, new PixelItem(Color.BlanchedAlmond, Content.Load<Texture2D>("poisonwall"), Color.White, new Vector2(0.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Lava, new PixelItem(Color.Red, Content.Load<Texture2D>("lava"), Color.White, new Vector2(0.08f)));
@@ -87,7 +85,8 @@ namespace TanookiSquirrel
 
             RaccoonDog.yesFly = true;
             RaccoonDog.big = true;
-           
+            RaccoonDog.attacking = true;
+
 
         }
 
@@ -117,11 +116,11 @@ namespace TanookiSquirrel
             // TODO: Add your update logic here
             RaccoonDog.Update(gameTime, ks);
 
-            
+
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Flag))
-            { 
+            {
                 for (int f = 0; f < map.Items[TanookiEnums.PixelTypes.Flag].Count; f++)
-                { 
+                {
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Flag][f].hitbox))
                     {
                         RaccoonDog.position = new Vector2(60, 570);
@@ -129,10 +128,11 @@ namespace TanookiSquirrel
                         {
                             map = new Map(Content.Load<Texture2D>("map2"));
                             lvlcount++;
+
                         }
                         else if (lvlcount == 2)
                         {
-                            
+
                             map = new Map(Content.Load<Texture2D>("map3"));
                             lvlcount++;
                         }
@@ -149,7 +149,7 @@ namespace TanookiSquirrel
                             colorswitch = Color.White;
                         }
                         break;
-                    }  
+                    }
                 }
             }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.SecretFlag))
@@ -165,7 +165,7 @@ namespace TanookiSquirrel
                             RaccoonDog.acceleration = 0.0000000001f;
                             map = new Map(Content.Load<Texture2D>("water"));
                             colorswitch = Color.DodgerBlue;
-                            
+
                         }
                         break;
                     }
@@ -182,11 +182,11 @@ namespace TanookiSquirrel
                     }
                 }
             }
-            
+
 
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Bowser))
             {
-              for(int z = 0; z < map.Items[TanookiEnums.PixelTypes.Bowser].Count; z++)
+                for (int z = 0; z < map.Items[TanookiEnums.PixelTypes.Bowser].Count; z++)
                 {
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Bowser][z].hitbox) && !RaccoonDog.shield)
                     {
@@ -203,18 +203,18 @@ namespace TanookiSquirrel
                     }
                 }
             }
-           
+
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.RedWall))
             {
-                for(int g = 0; g < map.Items[TanookiEnums.PixelTypes.RedWall].Count; g++)
+                for (int g = 0; g < map.Items[TanookiEnums.PixelTypes.RedWall].Count; g++)
                 {
-                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.RedWall][g].hitbox) )
-                    { 
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.RedWall][g].hitbox))
+                    {
                         if (!RaccoonDog.shield)
-                        { 
+                        {
                             RaccoonDog.dead = true;
                         }
-                        else if(shieldTime == TimeSpan.Zero)
+                        else if (shieldTime == TimeSpan.Zero)
                         {
                             //RaccoonDog.shield = false;
                             RaccoonDog.invincible = true;
@@ -229,13 +229,13 @@ namespace TanookiSquirrel
             }
             RaccoonDog.isFalling = true;
 
-           
+
 
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Revshield))
             {
                 for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Revshield].Count; i++)
                 {
-                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Revshield][i].hitbox) && !RaccoonDog.hasReverseShield )
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Revshield][i].hitbox) && !RaccoonDog.hasReverseShield)
                     {
                         RaccoonDog.hasReverseShield = true;
                         //if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
@@ -244,7 +244,7 @@ namespace TanookiSquirrel
                         //}
                     }
 
-                   
+
 
                 }
             }
@@ -266,7 +266,7 @@ namespace TanookiSquirrel
 
 
 
-               
+
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Cactus))
             {
                 for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Cactus].Count; i++)
@@ -278,13 +278,13 @@ namespace TanookiSquirrel
                 }
             }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Mush))
-            { 
+            {
                 for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Mush].Count; j++)
                 {
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Mush][j].hitbox))
                     {
                         RaccoonDog.yesFly = true;
-                    }            
+                    }
                 }
             }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Lava))
@@ -311,8 +311,8 @@ namespace TanookiSquirrel
                     {
                         RaccoonDog.dead = true;
                     }
-                     
-                    
+
+
                 }
             }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Coin))
@@ -322,6 +322,8 @@ namespace TanookiSquirrel
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Coin][i].hitbox))
                     {
                         map.Items[TanookiEnums.PixelTypes.Coin].RemoveAt(i);
+                        count++;
+                        label.text = $"Coins: {count}";
                     }
                 }
             }
@@ -336,27 +338,28 @@ namespace TanookiSquirrel
                         i--;
                     }
 
-                    else */ if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
+                    else */
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
                     {
-                       RaccoonDog.isFalling = false;
+                        RaccoonDog.isFalling = false;
                         //RaccoonDog.dead = true;
-                      
+
                     }
                 }
             }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Goomba))
+            {
+                for (int m = 0; m < map.Items[TanookiEnums.PixelTypes.Goomba].Count; m++)
                 {
-                    for (int m = 0; m < map.Items[TanookiEnums.PixelTypes.Goomba].Count; m++)
-                    {
-                        if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Goomba][m].hitbox) && RaccoonDog.fight)
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Goomba][m].hitbox) && RaccoonDog.fight)
                     {
                         map.Items[TanookiEnums.PixelTypes.Goomba].RemoveAt(m);
                         m--;
                     }
-                        else if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Goomba][m].hitbox) && !RaccoonDog.shield)
-                        {
+                    else if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Goomba][m].hitbox) && !RaccoonDog.shield)
+                    {
                         RaccoonDog.dead = true;
-                        }
+                    }
                 }
             }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Sword))
@@ -380,12 +383,12 @@ namespace TanookiSquirrel
 
                 }
             }
-            
-           if (RaccoonDog.invincible == true)
+
+            if (RaccoonDog.invincible == true)
             {
                 shieldTime += gameTime.ElapsedGameTime;
 
-                if(shieldTime > TimeSpan.FromSeconds(10))
+                if (shieldTime > TimeSpan.FromSeconds(10))
                 {
                     RaccoonDog.invincible = false;
                     RaccoonDog.shield = false;
@@ -411,15 +414,17 @@ namespace TanookiSquirrel
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
-        {            
+        {
             GraphicsDevice.Clear(colorswitch);
             spriteBatch.Begin();
 
             map.Draw(spriteBatch);
 
             RaccoonDog.DrawFloor(spriteBatch, GraphicsDevice);
+            //spriteBatch.DrawString()
+            label.Draw(spriteBatch);
             RaccoonDog.Draw(spriteBatch);
-           
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
