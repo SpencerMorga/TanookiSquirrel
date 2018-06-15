@@ -46,7 +46,10 @@ namespace TanookiSquirrel
             CheepCheep,
             Cactus,
             Coral,
-            Coin
+            Coin,
+            Pepe,
+            Shovel,
+            StoreSign
         }
         public enum TanookiFrames2
         {

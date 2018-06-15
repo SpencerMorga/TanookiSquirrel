@@ -81,6 +81,9 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Coral, new PixelItem(Color.DarkBlue, Content.Load<Texture2D>("coral"), Color.White, new Vector2(2.5f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Water, new PixelItem(Color.DodgerBlue, Content.Load<Texture2D>("actual water"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Coin, new PixelItem(Color.Firebrick, Content.Load<Texture2D>("coin"), Color.White, new Vector2(1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Shovel, new PixelItem(Color.LightCyan, Content.Load<Texture2D>("alexsbeautifiedshovel"), Color.White, new Vector2(1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Pepe, new PixelItem(Color.Khaki, Content.Load<Texture2D>("pepe"), Color.White, new Vector2(1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.StoreSign, new PixelItem(Color.Bisque, Content.Load<Texture2D>("store"), Color.White, new Vector2(1f)));
             map = new Map(Content.Load<Texture2D>("map"));
 
             RaccoonDog.yesFly = true;

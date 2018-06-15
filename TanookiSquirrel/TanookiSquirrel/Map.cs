@@ -90,6 +90,18 @@ namespace TanookiSquirrel
         //coin
         Vector2 scalecoin = PixelItem.Items[TanookiEnums.PixelTypes.Coin].Sprite.Scale;
         Vector2 imageSizecoin = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Coin].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Coin].Sprite.image.Height);
+
+        //shovel
+        Vector2 scaleshovel = PixelItem.Items[TanookiEnums.PixelTypes.Shovel].Sprite.Scale;
+        Vector2 imageSizeshovel = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Shovel].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Shovel].Sprite.image.Height);
+
+        //pepe
+        Vector2 scalepepe = PixelItem.Items[TanookiEnums.PixelTypes.Pepe].Sprite.Scale;
+        Vector2 imageSizepepe = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Pepe].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Pepe].Sprite.image.Height);
+
+        //storesign
+        Vector2 scalestoresign = PixelItem.Items[TanookiEnums.PixelTypes.StoreSign].Sprite.Scale;
+        Vector2 imageSizestoresign = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.StoreSign].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.StoreSign].Sprite.image.Height);
             public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -190,6 +202,18 @@ namespace TanookiSquirrel
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Coin].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.Coin, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Shovel].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Shovel, position);
+                    }
+                    if (pixels[j,i] == PixelItem.Items[TanookiEnums.PixelTypes.Pepe].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Pepe, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.StoreSign].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.StoreSign, position);
                     }
                     counter++;
                 }
