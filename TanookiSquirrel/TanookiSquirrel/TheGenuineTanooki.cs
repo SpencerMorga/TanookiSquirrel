@@ -39,6 +39,7 @@ namespace TanookiSquirrel
         public bool hasReverseShield = false;
         public float acceleration = .1f;
         public bool attacking = false;
+        public bool frogpowers = false;
         float initialYSpeed;
 
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
@@ -267,27 +268,13 @@ namespace TanookiSquirrel
 
 
 
-            if (currentTanookiState == TanookiEnums.TanookiFrames.Stone)
-            {
-                if (currentTanookiframeIndex + 1 >= frames.Count)
-                {
-                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
-                }
-
-            }
-            if (currentTanookiState == TanookiEnums.TanookiFrames.DEATH)
-            {
-                if (currentTanookiframeIndex + 1 >= frames.Count)
-                {
-                    currentTanookiState = TanookiEnums.TanookiFrames.Idle;
-                }
-            }
+           
             if (dead == true)
             {
                 position = new Vector2(60, 570);
                 dead = false;
             }
-
+            /*
             if (currentTanookiState == TanookiEnums.TanookiFrames.Pull_Hat_Over_Head)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
@@ -296,19 +283,45 @@ namespace TanookiSquirrel
                 }
 
             }
+
             if (ks.IsKeyDown(Keys.S))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Pull_Hat_Over_Head;
             }
+            */
 
-            if (currentTanookiState == TanookiEnums.TanookiFrames.Fwalk)
+
+            /*
+           
+            */
+            if (ks.IsKeyDown(Keys.S))
+            {
+                currentTanookiState = TanookiEnums.TanookiFrames.Fwall;
+                position.Y += speed.Y;
+            }
+
+
+            if (currentTanookiState == TanookiEnums.TanookiFrames.SpinAttack)
+            {
+
+                if (currentTanookiframeIndex + 1 >= frames.Count)
+                {
+                    currentTanookiState = TanookiEnums.TanookiFrames.SpinAttack;
+                
+                }
+
+            }
+            if (frogpowers == true)
+            {
+ if (currentTanookiState == TanookiEnums.TanookiFrames.Fwalk)
             {
                 if (currentTanookiframeIndex + 1 >= frames.Count)
                 {
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-
+            
+            
             if (ks.IsKeyDown(Keys.Right))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Fwalk;
@@ -347,22 +360,6 @@ namespace TanookiSquirrel
                     currentTanookiState = TanookiEnums.TanookiFrames.Idle;
                 }
             }
-            if (ks.IsKeyDown(Keys.S))
-            {
-                currentTanookiState = TanookiEnums.TanookiFrames.Fwall;
-                position.Y += speed.Y;
-            }
-
-
-            if (currentTanookiState == TanookiEnums.TanookiFrames.SpinAttack)
-            {
-
-                if (currentTanookiframeIndex + 1 >= frames.Count)
-                {
-                    currentTanookiState = TanookiEnums.TanookiFrames.SpinAttack;
-                
-                }
-
             }
             if (attacking)
             {
