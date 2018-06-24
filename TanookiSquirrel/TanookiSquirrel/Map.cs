@@ -102,6 +102,10 @@ namespace TanookiSquirrel
         //storesign
         Vector2 scalestoresign = PixelItem.Items[TanookiEnums.PixelTypes.StoreSign].Sprite.Scale;
         Vector2 imageSizestoresign = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.StoreSign].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.StoreSign].Sprite.image.Height);
+
+        //shoes
+        Vector2 scaleshoes = PixelItem.Items[TanookiEnums.PixelTypes.Shoes].Sprite.Scale;
+        Vector2 imageSizeshoes = new Vector2(PixelItem.Items[TanookiEnums.PixelTypes.Shoes].Sprite.image.Width, PixelItem.Items[TanookiEnums.PixelTypes.Shoes].Sprite.image.Height);
             public Map(Texture2D mapImage)
         {
             Items = new Dictionary<TanookiEnums.PixelTypes, List<TanookiSprite>>();
@@ -214,6 +218,10 @@ namespace TanookiSquirrel
                     if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.StoreSign].PixelColor)
                     {
                         AddSprite(TanookiEnums.PixelTypes.StoreSign, position);
+                    }
+                    if (pixels[j, i] == PixelItem.Items[TanookiEnums.PixelTypes.Shoes].PixelColor)
+                    {
+                        AddSprite(TanookiEnums.PixelTypes.Shoes, position);
                     }
                     counter++;
                 }

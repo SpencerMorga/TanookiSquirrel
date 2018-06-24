@@ -40,11 +40,14 @@ namespace TanookiSquirrel
         public float acceleration = .1f;
         public bool attacking = false;
         public bool frogpowers = false;
+        public bool speedchange = false;
+        public bool speedactivation = false;
         float initialYSpeed;
 
         public TheGenuineTanooki(Texture2D image, Vector2 position, Vector2 speed, Color color, List<Frame> frames)
             : base(image, position, speed, color, frames)
         {
+            
             Scale = new Vector2(1.3f);
             initialYSpeed = speed.Y;
             List<Frame> ExperimentalRunning = new List<Frame>()
@@ -165,8 +168,21 @@ namespace TanookiSquirrel
                 position.Y = floor - frames[currentTanookiframeIndex].frame.Height;
                 isFalling = false;
             }
-
-
+            
+                if (speedchange && speedactivation)
+                {
+                    speed.X += 5;
+                    speedchange = !speedchange;
+                }
+            
+            if (ks.IsKeyDown(Keys.F))
+            {
+                speedactivation = true;
+            }
+            if (ks.IsKeyDown(Keys.G))
+            {
+                speedactivation = false;
+            }
             switch (currentTanookiState)
             {
                 case TanookiEnums.TanookiFrames.Swimming:
@@ -321,7 +337,8 @@ namespace TanookiSquirrel
                 }
             }
             
-            
+                   
+
             if (ks.IsKeyDown(Keys.Right))
             {
                 currentTanookiState = TanookiEnums.TanookiFrames.Fwalk;
@@ -382,8 +399,8 @@ namespace TanookiSquirrel
                 fight = false;
             }
             
-           
-
+        
+       
            
             base.Update(gTime);
         }

@@ -27,6 +27,8 @@ namespace TanookiSquirrel
         public TimeSpan shieldTime = new TimeSpan(0, 0, 0, 3, 0);
         public TimeSpan revshieldTime = new TimeSpan(0, 0, 0, 3, 0);
         public bool wallbreak = false;
+        //public bool shoespeed = false;
+
         Color colorswitch = Color.White;
 
         public Game1()
@@ -60,7 +62,7 @@ namespace TanookiSquirrel
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             label = new Labels(Content.Load<SpriteFont>("font"), $"Coins: {count}", new Vector2(50, 50), Color.Blue);
-            
+
             RaccoonDog = new TheGenuineTanooki(Content.Load<Texture2D>("raccoon dog"), new Vector2(60, 550), new Vector2(3), Color.White, new List<Frame>());
             PixelItem.AddItem(TanookiEnums.PixelTypes.Wall, new PixelItem(Color.Black, Content.Load<Texture2D>("wall"), Color.White, new Vector2(0.08f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.RedWall, new PixelItem(Color.BlanchedAlmond, Content.Load<Texture2D>("poisonwall"), Color.White, new Vector2(0.08f)));
@@ -84,6 +86,7 @@ namespace TanookiSquirrel
             PixelItem.AddItem(TanookiEnums.PixelTypes.Shovel, new PixelItem(Color.LightCyan, Content.Load<Texture2D>("alexsbeautifiedshovel"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.Pepe, new PixelItem(Color.Khaki, Content.Load<Texture2D>("pepe"), Color.White, new Vector2(1f)));
             PixelItem.AddItem(TanookiEnums.PixelTypes.StoreSign, new PixelItem(Color.Bisque, Content.Load<Texture2D>("storesign"), Color.White, new Vector2(1f)));
+            PixelItem.AddItem(TanookiEnums.PixelTypes.Shoes, new PixelItem(Color.DarkOliveGreen, Content.Load<Texture2D>("shoes"), Color.White, new Vector2(1f)));
             map = new Map(Content.Load<Texture2D>("map"));
 
             RaccoonDog.yesFly = true;
@@ -151,6 +154,13 @@ namespace TanookiSquirrel
                             lvlcount++;
                             colorswitch = Color.White;
                         }
+                        /*
+                        else if (lvlcount == 6)
+                        {
+                            map = new Map(Content.Load<Texture2D>("map"));
+                            lvlcount = 1;
+                        }\
+                        */
                         break;
                     }
                 }
@@ -180,12 +190,13 @@ namespace TanookiSquirrel
                 {
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.StoreSign][i].hitbox))
                     {
+
+                     
+                            map = new Map(Content.Load<Texture2D>("map6"));                  
                         
-                        
-                            map = new Map(Content.Load<Texture2D>("map6"));
-                            break;
                         
                     }
+                    
                 }
             }
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Pepe))
@@ -210,20 +221,31 @@ namespace TanookiSquirrel
             }
             if (wallbreak == true)
             {
-if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
-            {
-                for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Wall].Count; j++)
+                if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
                 {
-
-                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][j].hitbox) && RaccoonDog.fight)
+                    for (int j = 0; j < map.Items[TanookiEnums.PixelTypes.Wall].Count; j++)
                     {
-                        map.Items[TanookiEnums.PixelTypes.Wall].RemoveAt(j);
-                        j--;
-                    }
 
+                        if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][j].hitbox) && RaccoonDog.fight)
+                        {
+                            map.Items[TanookiEnums.PixelTypes.Wall].RemoveAt(j);
+                            j--;
+                        }
+
+                    }
+                }   
+            }
+            if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Shoes))
+            {
+                for (int i = 0; i < map.Items[TanookiEnums.PixelTypes.Shoes].Count; i++)
+                {
+                    if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Shoes][i].hitbox) && count >= 5)
+                    {
+                        RaccoonDog.speedchange = true;
+                    }
                 }
             }
-            }
+
             if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Shield) && !RaccoonDog.shield)
             {
                 for (int y = 0; y < map.Items[TanookiEnums.PixelTypes.Shield].Count; y++)
@@ -316,11 +338,11 @@ if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
                     {
                         if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))
                         {
-                         RaccoonDog.isFalling = false;
+                            RaccoonDog.isFalling = false;
                         }
-                        
+
                     }
-               
+
                 }
 
 
@@ -389,7 +411,7 @@ if (map.Items.ContainsKey(TanookiEnums.PixelTypes.Wall))
                     }
                 }
             }
-          
+
             /*
             else
                     if (RaccoonDog.hitbox.Intersects(map.Items[TanookiEnums.PixelTypes.Wall][i].hitbox))

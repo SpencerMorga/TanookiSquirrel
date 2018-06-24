@@ -49,7 +49,8 @@ namespace TanookiSquirrel
             Coin,
             Pepe,
             Shovel,
-            StoreSign
+            StoreSign,
+            Shoes
         }
         public enum TanookiFrames2
         {
